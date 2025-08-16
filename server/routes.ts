@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertContactSchema } from "@shared/schema";
 import { z } from "zod";
+import { sendContactEmail } from "./email";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Contact form submission endpoint
@@ -11,18 +12,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const contactData = insertContactSchema.parse(req.body);
       const contact = await storage.createContact(contactData);
       
-      // TODO: In production, integrate with email service (Nodemailer, SendGrid, etc.)
-      // await sendContactEmail(contact);
+      // Send email notification
+      const emailSent = await sendContactEmail({
+        name: contact.name,
+        email: contact.email,
+        subject: contact.subject,
+        message: contact.message,
+        phone: contact.phone || undefined
+      });
+
+      if (!emailSent) {
+        console.warn("Email failed to send, but contact was saved to database");
+      }
       
       res.json({ 
         success: true, 
-        message: "Message sent successfully!",
+        message: emailSent 
+          ? "Message sent successfully! You'll receive a response soon."
+          : "Message received! There was an issue with email delivery, but your message has been saved.",
         contact: {
           id: contact.id,
           name: contact.name,
           email: contact.email,
           subject: contact.subject
-        }
+        },
+        emailSent
       });
     } catch (error) {
       if (error instanceof z.ZodError) {

@@ -53,8 +53,10 @@ export default function Contact() {
     },
     onSuccess: (data) => {
       toast({
-        title: "Success!",
-        description: data.message || "Message sent successfully!",
+        title: "Message sent successfully! 📧",
+        description: data.emailSent 
+          ? "Your message has been sent to aliyaanmohd42@gmail.com. You'll receive a response soon!"
+          : data.message || "Your message has been received and saved. I'll get back to you soon!",
       });
       form.reset();
     },
