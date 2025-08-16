@@ -14,7 +14,6 @@ interface ContactFormData {
   email: string;
   subject: string;
   message: string;
-  phone?: string;
 }
 
 export async function sendContactEmail(formData: ContactFormData): Promise<boolean> {
@@ -38,7 +37,6 @@ export async function sendContactEmail(formData: ContactFormData): Promise<boole
             <h3 style="color: #8b45c7;">Contact Details:</h3>
             <p><strong>Name:</strong> ${formData.name}</p>
             <p><strong>Email:</strong> ${formData.email}</p>
-            ${formData.phone ? `<p><strong>Phone:</strong> ${formData.phone}</p>` : ''}
             <p><strong>Subject:</strong> ${formData.subject}</p>
           </div>
           
@@ -60,7 +58,6 @@ export async function sendContactEmail(formData: ContactFormData): Promise<boole
         
         Name: ${formData.name}
         Email: ${formData.email}
-        ${formData.phone ? `Phone: ${formData.phone}` : ''}
         Subject: ${formData.subject}
         
         Message:

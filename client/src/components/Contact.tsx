@@ -42,7 +42,6 @@ export default function Contact() {
       email: "",
       subject: "",
       message: "",
-      phone: "",
     },
   });
 
