@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 const contactFormSchema = insertContactSchema.extend({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -22,6 +24,14 @@ type ContactFormData = z.infer<typeof contactFormSchema>;
 
 export default function Contact() {
   const { toast } = useToast();
+  const ref = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
@@ -59,75 +69,129 @@ export default function Contact() {
     contactMutation.mutate(data);
   };
 
+  const contactInfo = [
+    {
+      icon: Phone,
+      label: "Phone",
+      value: "+918272049522",
+      color: "primary"
+    },
+    {
+      icon: Mail,
+      label: "Email",
+      value: "contact@hamd.dev",
+      color: "secondary"
+    },
+    {
+      icon: MapPin,
+      label: "Location",
+      value: "India",
+      color: "accent"
+    }
+  ];
+
+  const socialLinks = [
+    { icon: Linkedin, href: "#", color: "from-primary to-secondary" },
+    { icon: Github, href: "#", color: "from-secondary to-accent" },
+    { icon: Twitter, href: "#", color: "from-accent to-success" }
+  ];
+
   return (
-    <section id="contact" className="py-20 px-4">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="font-poppins text-4xl md:text-5xl font-bold mb-4">
-            <span className="text-gradient">Get In Touch</span>
+    <section ref={ref} id="contact" className="py-32 px-4 relative overflow-hidden">
+      {/* Parallax Background */}
+      <motion.div 
+        style={{ y }}
+        className="absolute inset-0 opacity-10"
+      >
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-primary to-secondary rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-accent to-success rounded-full blur-3xl" />
+      </motion.div>
+
+      <div className="max-w-6xl mx-auto relative z-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-20"
+        >
+          <h2 className="font-display text-5xl md:text-7xl font-black mb-6">
+            <span className="premium-gradient bg-clip-text text-transparent">Get In Touch</span>
           </h2>
-          <p className="text-gray-300 dark:text-gray-600 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-300 dark:text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed">
             Ready to bring your ideas to life? Let's discuss your next project and create something amazing together.
           </p>
-        </div>
+        </motion.div>
         
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid md:grid-cols-2 gap-16">
           {/* Contact Info */}
-          <div className="space-y-8">
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="space-y-12"
+          >
             <div>
-              <h3 className="font-poppins text-2xl font-semibold mb-6 text-primary">Contact Information</h3>
-              <div className="space-y-4">
-                <div className="flex items-center space-x-4" data-testid="contact-phone">
-                  <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
-                    <Phone className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-semibold">Phone</p>
-                    <p className="text-gray-400 dark:text-gray-600">+918272049522</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center space-x-4" data-testid="contact-email">
-                  <div className="w-12 h-12 bg-secondary/20 rounded-lg flex items-center justify-center">
-                    <Mail className="w-5 h-5 text-secondary" />
-                  </div>
-                  <div>
-                    <p className="font-semibold">Email</p>
-                    <p className="text-gray-400 dark:text-gray-600">contact@portfolio.dev</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center space-x-4" data-testid="contact-location">
-                  <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center">
-                    <MapPin className="w-5 h-5 text-accent" />
-                  </div>
-                  <div>
-                    <p className="font-semibold">Location</p>
-                    <p className="text-gray-400 dark:text-gray-600">India</p>
-                  </div>
-                </div>
+              <h3 className="font-display text-3xl font-bold mb-8 text-primary">Contact Information</h3>
+              <div className="space-y-6">
+                {contactInfo.map((info, index) => (
+                  <motion.div 
+                    key={info.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1, duration: 0.6 }}
+                    viewport={{ once: true }}
+                    className="flex items-center space-x-6 group"
+                    data-testid={`contact-${info.label.toLowerCase()}`}
+                  >
+                    <motion.div 
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      className={`w-16 h-16 glass-morphism rounded-2xl flex items-center justify-center group-hover:bg-${info.color}/20 transition-all duration-300`}
+                    >
+                      <info.icon className={`w-6 h-6 text-${info.color}`} />
+                    </motion.div>
+                    <div>
+                      <p className="font-semibold text-lg">{info.label}</p>
+                      <p className="text-gray-400 dark:text-gray-600 text-lg">{info.value}</p>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </div>
             
             {/* Social Links */}
             <div>
-              <h3 className="font-poppins text-xl font-semibold mb-4">Follow Me</h3>
+              <h3 className="font-display text-2xl font-bold mb-6">Follow Me</h3>
               <div className="flex space-x-4">
-                <a href="#" className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center text-white hover:scale-110 transition-transform duration-300" data-testid="social-linkedin">
-                  <Linkedin className="w-5 h-5" />
-                </a>
-                <a href="#" className="w-12 h-12 bg-gradient-to-br from-secondary to-accent rounded-lg flex items-center justify-center text-white hover:scale-110 transition-transform duration-300" data-testid="social-github">
-                  <Github className="w-5 h-5" />
-                </a>
-                <a href="#" className="w-12 h-12 bg-gradient-to-br from-accent to-success rounded-lg flex items-center justify-center text-white hover:scale-110 transition-transform duration-300" data-testid="social-twitter">
-                  <Twitter className="w-5 h-5" />
-                </a>
+                {socialLinks.map((social, index) => (
+                  <motion.a 
+                    key={index}
+                    href={social.href}
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: index * 0.1, duration: 0.6 }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.2, rotate: 5 }}
+                    whileTap={{ scale: 0.9 }}
+                    className={`w-16 h-16 bg-gradient-to-br ${social.color} rounded-2xl flex items-center justify-center text-white shadow-lg hover:shadow-xl transition-all duration-300`}
+                    data-testid={`social-${index}`}
+                  >
+                    <social.icon className="w-6 h-6" />
+                  </motion.a>
+                ))}
               </div>
             </div>
-          </div>
+          </motion.div>
           
           {/* Contact Form */}
-          <div>
+          <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="glass-morphism rounded-3xl p-8 backdrop-blur-xl"
+          >
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
@@ -136,14 +200,16 @@ export default function Contact() {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Name</FormLabel>
+                        <FormLabel className="text-lg font-semibold">Name</FormLabel>
                         <FormControl>
-                          <Input
-                            {...field}
-                            placeholder="Your Name"
-                            className="bg-dark-card dark:bg-gray-100 border-gray-700 dark:border-gray-200 focus:border-primary"
-                            data-testid="input-name"
-                          />
+                          <motion.div whileFocus={{ scale: 1.02 }}>
+                            <Input
+                              {...field}
+                              placeholder="Your Name"
+                              className="bg-dark-card/50 dark:bg-gray-100/50 border-gray-700/50 dark:border-gray-200/50 focus:border-primary rounded-xl h-12 glass-morphism"
+                              data-testid="input-name"
+                            />
+                          </motion.div>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -154,15 +220,17 @@ export default function Contact() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email</FormLabel>
+                        <FormLabel className="text-lg font-semibold">Email</FormLabel>
                         <FormControl>
-                          <Input
-                            {...field}
-                            type="email"
-                            placeholder="your@email.com"
-                            className="bg-dark-card dark:bg-gray-100 border-gray-700 dark:border-gray-200 focus:border-primary"
-                            data-testid="input-email"
-                          />
+                          <motion.div whileFocus={{ scale: 1.02 }}>
+                            <Input
+                              {...field}
+                              type="email"
+                              placeholder="your@email.com"
+                              className="bg-dark-card/50 dark:bg-gray-100/50 border-gray-700/50 dark:border-gray-200/50 focus:border-primary rounded-xl h-12 glass-morphism"
+                              data-testid="input-email"
+                            />
+                          </motion.div>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -175,14 +243,16 @@ export default function Contact() {
                   name="subject"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Subject</FormLabel>
+                      <FormLabel className="text-lg font-semibold">Subject</FormLabel>
                       <FormControl>
-                        <Input
-                          {...field}
-                          placeholder="Project Discussion"
-                          className="bg-dark-card dark:bg-gray-100 border-gray-700 dark:border-gray-200 focus:border-primary"
-                          data-testid="input-subject"
-                        />
+                        <motion.div whileFocus={{ scale: 1.02 }}>
+                          <Input
+                            {...field}
+                            placeholder="Project Discussion"
+                            className="bg-dark-card/50 dark:bg-gray-100/50 border-gray-700/50 dark:border-gray-200/50 focus:border-primary rounded-xl h-12 glass-morphism"
+                            data-testid="input-subject"
+                          />
+                        </motion.div>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -194,35 +264,46 @@ export default function Contact() {
                   name="message"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Message</FormLabel>
+                      <FormLabel className="text-lg font-semibold">Message</FormLabel>
                       <FormControl>
-                        <Textarea
-                          {...field}
-                          rows={5}
-                          placeholder="Tell me about your project..."
-                          className="bg-dark-card dark:bg-gray-100 border-gray-700 dark:border-gray-200 focus:border-primary resize-none"
-                          data-testid="textarea-message"
-                        />
+                        <motion.div whileFocus={{ scale: 1.02 }}>
+                          <Textarea
+                            {...field}
+                            rows={6}
+                            placeholder="Tell me about your project..."
+                            className="bg-dark-card/50 dark:bg-gray-100/50 border-gray-700/50 dark:border-gray-200/50 focus:border-primary resize-none rounded-xl glass-morphism"
+                            data-testid="textarea-message"
+                          />
+                        </motion.div>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
                 
-                <Button
-                  type="submit"
-                  disabled={contactMutation.isPending}
-                  className="w-full px-8 py-4 bg-gradient-to-r from-primary to-secondary rounded-lg font-semibold text-white hover:shadow-2xl hover:shadow-primary/25 transition-all duration-300 transform hover:scale-[1.02]"
-                  data-testid="button-send-message"
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  <span className="flex items-center justify-center space-x-2">
-                    <span>{contactMutation.isPending ? "Sending..." : "Send Message"}</span>
-                    <Send className="w-4 h-4" />
-                  </span>
-                </Button>
+                  <Button
+                    type="submit"
+                    disabled={contactMutation.isPending}
+                    className="w-full px-8 py-6 premium-gradient rounded-xl font-semibold text-white text-lg shadow-2xl hover:shadow-primary/40 transition-all duration-500 glass-morphism backdrop-blur-xl"
+                    data-testid="button-send-message"
+                  >
+                    <motion.span 
+                      className="flex items-center justify-center space-x-3"
+                      animate={contactMutation.isPending ? { opacity: [1, 0.5, 1] } : {}}
+                      transition={{ duration: 1, repeat: contactMutation.isPending ? Infinity : 0 }}
+                    >
+                      <span>{contactMutation.isPending ? "Sending..." : "Send Message"}</span>
+                      <Send className="w-5 h-5" />
+                    </motion.span>
+                  </Button>
+                </motion.div>
               </form>
             </Form>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

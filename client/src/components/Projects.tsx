@@ -1,10 +1,32 @@
 import { useState } from "react";
 import { Github, ExternalLink } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import ProjectModal from "./ProjectModal";
 
 const projects = [
   {
     id: 'project1',
+    title: 'PDF Tools Suite - 30+ Tools',
+    description: 'Comprehensive PDF manipulation platform with 30+ tools including merge, split, compress, convert, and OCR capabilities. Built with React, Node.js, and advanced file processing.',
+    image: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400',
+    technologies: ['React', 'Node.js', 'TypeScript'],
+    features: [
+      '30+ PDF manipulation tools',
+      'Real-time file processing',
+      'Batch operations support',
+      'OCR text extraction',
+      'Advanced compression algorithms',
+      'Secure file handling & privacy',
+      'Mobile-responsive interface',
+      'Download progress tracking'
+    ],
+    fullTechnologies: ['React', 'Node.js', 'TypeScript', 'Express', 'MongoDB', 'PDF-lib', 'Multer', 'Sharp'],
+    github: '#',
+    demo: '#'
+  },
+  {
+    id: 'project2',
     title: 'E-Commerce Platform',
     description: 'Full-stack e-commerce solution built with React, Next.js, and Node.js featuring real-time inventory and payment processing.',
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400',
@@ -22,7 +44,7 @@ const projects = [
     demo: '#'
   },
   {
-    id: 'project2',
+    id: 'project3',
     title: 'Real-time Chat Application',
     description: 'Modern chat application with real-time messaging, file sharing, and video calling capabilities built with Socket.io.',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400',
@@ -40,10 +62,10 @@ const projects = [
     demo: '#'
   },
   {
-    id: 'project3',
+    id: 'project4',
     title: '3D Web Experience',
     description: 'Immersive 3D web application using Three.js with interactive environments, physics simulation, and VR support.',
-    image: 'https://pixabay.com/get/gb5bfcb36303edd3ae7a681c8f03e9a46284befafd863ef794b9bf46ed27243aee6fad8011b6cff612081e2adbbbb7ce0bbb6391eec2aae4a3255319af7dc85d9_1280.jpg',
+    image: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400',
     technologies: ['Three.js', 'WebGL', 'WebXR'],
     features: [
       'Interactive 3D environments',
@@ -61,6 +83,15 @@ const projects = [
 
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+  const ref = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
 
   const openProject = (project: typeof projects[0]) => {
     setSelectedProject(project);
@@ -71,62 +102,125 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="py-20 px-4 bg-dark-card/30 dark:bg-gray-50">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="font-poppins text-4xl md:text-5xl font-bold mb-4">
-            <span className="text-gradient">Featured Projects</span>
+    <section ref={ref} id="projects" className="py-32 px-4 relative overflow-hidden bg-dark-card/10 dark:bg-gray-50/5">
+      {/* Parallax Background */}
+      <motion.div 
+        style={{ y: backgroundY }}
+        className="absolute inset-0 opacity-5"
+      >
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-primary to-secondary rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-br from-accent to-success rounded-full blur-3xl" />
+      </motion.div>
+
+      <motion.div style={{ y }} className="max-w-7xl mx-auto relative z-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-20"
+        >
+          <h2 className="font-display text-5xl md:text-7xl font-black mb-6">
+            <span className="premium-gradient bg-clip-text text-transparent">Featured Projects</span>
           </h2>
-          <p className="text-gray-300 dark:text-gray-600 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-300 dark:text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed">
             Showcasing my latest work in web development, featuring modern technologies and innovative solutions.
           </p>
-        </div>
+        </motion.div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project) => (
-            <div 
+        <div className="grid md:grid-cols-2 gap-8">
+          {projects.map((project, index) => (
+            <motion.div 
               key={project.id}
-              className="tilt-card bg-dark-card dark:bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 group cursor-pointer"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1, duration: 0.6 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -10 }}
+              className="group cursor-pointer"
               onClick={() => openProject(project)}
               data-testid={`card-${project.id}`}
             >
-              <img 
-                src={project.image}
-                alt={project.title}
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              
-              <div className="p-6">
-                <h3 className="font-poppins text-xl font-semibold mb-2 group-hover:text-primary transition-colors duration-300">
-                  {project.title}
-                </h3>
-                <p className="text-gray-400 dark:text-gray-600 mb-4">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech) => (
-                    <span 
-                      key={tech}
-                      className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+              <div className="glass-morphism rounded-3xl overflow-hidden shadow-2xl hover:shadow-primary/20 transition-all duration-500 backdrop-blur-xl">
+                <div className="relative overflow-hidden">
+                  <motion.img 
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.4 }}
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-64 object-cover"
+                  />
+                  
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileHover={{ opacity: 1, y: 0 }}
+                    className="absolute bottom-4 left-4 right-4"
+                  >
+                    <div className="flex space-x-3">
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        className="p-3 glass-morphism rounded-full text-white hover:text-primary transition-colors"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          window.open(project.github, '_blank');
+                        }}
+                      >
+                        <Github className="w-5 h-5" />
+                      </motion.button>
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        className="p-3 glass-morphism rounded-full text-white hover:text-primary transition-colors"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          window.open(project.demo, '_blank');
+                        }}
+                      >
+                        <ExternalLink className="w-5 h-5" />
+                      </motion.button>
+                    </div>
+                  </motion.div>
                 </div>
-                <div className="flex justify-between items-center">
-                  <button className="text-primary hover:text-secondary transition-colors duration-300 font-semibold">
-                    View Details →
-                  </button>
-                  <div className="flex space-x-2">
-                    <Github className="w-5 h-5 text-gray-400 hover:text-primary transition-colors duration-300 cursor-pointer" />
-                    <ExternalLink className="w-5 h-5 text-gray-400 hover:text-primary transition-colors duration-300 cursor-pointer" />
+                
+                <div className="p-8">
+                  <h3 className="font-display text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-400 dark:text-gray-600 mb-6 leading-relaxed">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.technologies.map((tech) => (
+                      <motion.span 
+                        key={tech}
+                        whileHover={{ scale: 1.05 }}
+                        className="px-4 py-2 glass-morphism text-primary rounded-full text-sm font-medium"
+                      >
+                        {tech}
+                      </motion.span>
+                    ))}
                   </div>
+                  <motion.button 
+                    whileHover={{ x: 5 }}
+                    className="text-primary hover:text-secondary transition-colors duration-300 font-semibold flex items-center space-x-2"
+                  >
+                    <span>View Details</span>
+                    <motion.span
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      →
+                    </motion.span>
+                  </motion.button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
       
       {selectedProject && (
         <ProjectModal 

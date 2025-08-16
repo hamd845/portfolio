@@ -43,8 +43,8 @@ export default function Home() {
       {/* Footer */}
       <footer className="py-12 px-4 border-t border-gray-700/20 dark:border-gray-200/20">
         <div className="max-w-7xl mx-auto text-center">
-          <div className="font-poppins text-2xl font-bold mb-4">
-            <span className="text-gradient">Portfolio</span>
+          <div className="font-display text-2xl font-bold mb-4">
+            <span className="text-gradient">Hamd</span>
           </div>
           <p className="text-gray-400 dark:text-gray-600 mb-6">
             Building the future, one line of code at a time.
