@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
 
 const contactFormSchema = insertContactSchema.extend({
@@ -31,7 +31,9 @@ export default function Contact() {
     offset: ["start end", "end start"]
   });
   
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
+  const y = useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "40%"]), springConfig);
+  const backgroundY = useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "60%"]), springConfig);
   
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
@@ -100,8 +102,8 @@ export default function Contact() {
     <section ref={ref} id="contact" className="py-32 px-4 relative overflow-hidden">
       {/* Parallax Background */}
       <motion.div 
-        style={{ y }}
-        className="absolute inset-0 opacity-10"
+        style={{ y: backgroundY }}
+        className="absolute inset-0 opacity-15"
       >
         <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-primary to-secondary rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-accent to-success rounded-full blur-3xl" />
@@ -118,7 +120,7 @@ export default function Contact() {
           <h2 className="font-display text-5xl md:text-7xl font-black mb-6">
             <span className="premium-gradient bg-clip-text text-transparent">Get In Touch</span>
           </h2>
-          <p className="text-gray-300 dark:text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed">
+          <p className="text-white/80 dark:text-gray-700 text-xl max-w-3xl mx-auto leading-relaxed text-contrast">
             Ready to bring your ideas to life? Let's discuss your next project and create something amazing together.
           </p>
         </motion.div>
@@ -152,8 +154,8 @@ export default function Contact() {
                       <info.icon className={`w-6 h-6 text-${info.color}`} />
                     </motion.div>
                     <div>
-                      <p className="font-semibold text-lg">{info.label}</p>
-                      <p className="text-gray-400 dark:text-gray-600 text-lg">{info.value}</p>
+                      <p className="font-semibold text-lg text-white dark:text-gray-900">{info.label}</p>
+                      <p className="text-white/70 dark:text-gray-600 text-lg">{info.value}</p>
                     </div>
                   </motion.div>
                 ))}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Github, ExternalLink } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
 import ProjectModal from "./ProjectModal";
 
@@ -90,8 +90,10 @@ export default function Projects() {
     offset: ["start end", "end start"]
   });
   
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
+  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
+  const y = useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "30%"]), springConfig);
+  const backgroundY = useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "60%"]), springConfig);
+  const cardY = useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "15%"]), springConfig);
 
   const openProject = (project: typeof projects[0]) => {
     setSelectedProject(project);
@@ -123,12 +125,12 @@ export default function Projects() {
           <h2 className="font-display text-5xl md:text-7xl font-black mb-6">
             <span className="premium-gradient bg-clip-text text-transparent">Featured Projects</span>
           </h2>
-          <p className="text-gray-300 dark:text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed">
+          <p className="text-white/80 dark:text-gray-700 text-xl max-w-3xl mx-auto leading-relaxed text-contrast">
             Showcasing my latest work in web development, featuring modern technologies and innovative solutions.
           </p>
         </motion.div>
         
-        <div className="grid md:grid-cols-2 gap-8">
+        <motion.div style={{ y: cardY }} className="grid md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
             <motion.div 
               key={project.id}
@@ -189,7 +191,7 @@ export default function Projects() {
                   <h3 className="font-display text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">
                     {project.title}
                   </h3>
-                  <p className="text-gray-400 dark:text-gray-600 mb-6 leading-relaxed">
+                  <p className="text-white/70 dark:text-gray-600 mb-6 leading-relaxed text-contrast">
                     {project.description}
                   </p>
                   <div className="flex flex-wrap gap-2 mb-6">
@@ -219,7 +221,7 @@ export default function Projects() {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </motion.div>
       
       {selectedProject && (

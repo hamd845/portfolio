@@ -5,6 +5,7 @@ import Contact from "@/components/Contact";
 import Navigation from "@/components/Navigation";
 import { useScrollProgress } from "@/hooks/use-scroll-progress";
 import { useEffect } from "react";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const scrollProgress = useScrollProgress();
@@ -24,7 +25,12 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-dark-bg dark:bg-background text-light-text dark:text-foreground overflow-x-hidden">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen bg-dark-bg dark:bg-background text-light-text dark:text-foreground overflow-x-hidden scroll-smooth"
+    >
       {/* Scroll Progress Indicator */}
       <div 
         className="scroll-indicator"
@@ -54,6 +60,6 @@ export default function Home() {
           </p>
         </div>
       </footer>
-    </div>
+    </motion.div>
   );
 }

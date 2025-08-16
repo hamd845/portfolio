@@ -1,5 +1,5 @@
 import { ChevronDown } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import Scene3D from "./three/Scene3D";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
 import { useRef } from "react";
@@ -12,22 +12,32 @@ export default function Hero() {
     offset: ["start end", "end start"]
   });
   
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0]);
+  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
+  const y = useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "80%"]), springConfig);
+  const backgroundY = useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "120%"]), springConfig);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], [1, 0.9, 0.5, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
 
   return (
     <section ref={ref} id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <Scene3D />
       
-      {/* Parallax Background Layers */}
+      {/* Enhanced Parallax Background Layers */}
       <motion.div 
-        style={{ y }} 
-        className="absolute inset-0 mesh-gradient opacity-30"
+        style={{ y: backgroundY }} 
+        className="absolute inset-0 mesh-gradient opacity-40"
       />
+      <motion.div 
+        style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "60%"]) }} 
+        className="absolute inset-0 opacity-20"
+      >
+        <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-full blur-3xl animate-float-slow" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-accent/20 to-success/20 rounded-full blur-3xl animate-float-slow" style={{ animationDelay: '2s' }} />
+      </motion.div>
       
       {/* Hero Content */}
       <motion.div 
-        style={{ opacity }}
+        style={{ opacity, scale, y }}
         className="relative z-10 text-center px-4 max-w-6xl mx-auto"
       >
         <motion.h1 
@@ -40,7 +50,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="block text-light-text dark:text-foreground mb-4"
+            className="block text-white dark:text-gray-900 mb-4 text-contrast font-medium"
           >
             Hi, I'm
           </motion.span>
@@ -58,9 +68,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 0.8 }}
-          className="text-xl md:text-3xl text-gray-300 dark:text-gray-600 mb-12 max-w-4xl mx-auto font-light leading-relaxed"
+          className="text-xl md:text-3xl text-white/90 dark:text-gray-800 mb-12 max-w-4xl mx-auto font-light leading-relaxed text-contrast"
         >
-          Full Stack Developer crafting <span className="text-primary font-semibold">premium digital experiences</span> with 
+          Full Stack Developer crafting <span className="text-primary font-semibold bg-white/10 dark:bg-black/10 px-2 py-1 rounded">premium digital experiences</span> with 
           cutting-edge technology and innovative solutions.
         </motion.p>
         

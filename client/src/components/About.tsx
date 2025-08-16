@@ -1,6 +1,6 @@
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 const skills = [
   { name: "React/Next.js", percentage: 95, delay: 0 },
@@ -18,8 +18,10 @@ export default function About() {
     offset: ["start end", "end start"]
   });
   
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
+  const y = useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "40%"]), springConfig);
+  const backgroundY = useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "70%"]), springConfig);
+  const textY = useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "20%"]), springConfig);
 
   return (
     <section id="about" className="py-32 px-4 relative overflow-hidden" ref={ref}>
@@ -32,7 +34,7 @@ export default function About() {
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-br from-accent to-success rounded-full blur-3xl" />
       </motion.div>
 
-      <motion.div style={{ y }} className="max-w-7xl mx-auto relative z-10">
+      <motion.div style={{ y: textY }} className="max-w-7xl mx-auto relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -43,7 +45,7 @@ export default function About() {
           <h2 className="font-display text-5xl md:text-7xl font-black mb-6">
             <span className="premium-gradient bg-clip-text text-transparent">About Me</span>
           </h2>
-          <p className="text-gray-300 dark:text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed">
+          <p className="text-white/80 dark:text-gray-700 text-xl max-w-3xl mx-auto leading-relaxed text-contrast">
             Passionate developer with expertise in modern web technologies and a love for creating innovative solutions.
           </p>
         </motion.div>
@@ -85,7 +87,7 @@ export default function About() {
           >
             <div>
               <h3 className="font-display text-3xl font-bold mb-6 text-primary">My Journey</h3>
-              <p className="text-gray-300 dark:text-gray-600 leading-relaxed text-lg mb-8">
+              <p className="text-white/80 dark:text-gray-700 leading-relaxed text-lg mb-8 text-contrast">
                 With over 5 years of experience in web development, I specialize in creating 
                 scalable applications using React, Next.js, and Node.js. My passion lies in 
                 building user-centric solutions that combine beautiful design with robust functionality.
@@ -106,7 +108,7 @@ export default function About() {
                     data-testid={`skill-${skill.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}`}
                   >
                     <div className="flex justify-between mb-3">
-                      <span className="font-semibold text-lg">{skill.name}</span>
+                      <span className="font-semibold text-lg text-white dark:text-gray-900">{skill.name}</span>
                       <span className="text-primary font-bold text-lg">{skill.percentage}%</span>
                     </div>
                     <div className="w-full bg-gray-700/30 dark:bg-gray-200/30 rounded-full h-3 overflow-hidden glass-morphism">
