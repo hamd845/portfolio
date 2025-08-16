@@ -82,14 +82,16 @@ export default function Hero() {
               <ChevronDown className="w-4 h-4 rotate-[-90deg]" />
             </span>
           </motion.button>
-          <motion.button 
+          <motion.a
+            href="/Hamd_Elahi_Resume.pdf"
+            download="Hamd_Elahi_Resume.pdf"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
-            className="px-10 py-5 glass-morphism border-2 border-primary/50 text-primary rounded-2xl font-semibold hover:bg-primary/10 transition-all duration-500 backdrop-blur-xl"
+            className="px-10 py-5 glass-morphism border-2 border-primary/50 text-primary rounded-2xl font-semibold hover:bg-primary/10 transition-all duration-500 backdrop-blur-xl inline-block"
             data-testid="button-download-resume"
           >
             Download Resume
-          </motion.button>
+          </motion.a>
         </motion.div>
       </motion.div>
       
