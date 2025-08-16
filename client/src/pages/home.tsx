@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import ScrollProgress from "@/components/ScrollProgress";
 import FloatingElements from "@/components/FloatingElements";
+import AuthSection from "@/components/auth/AuthSection";
 
 export default function Home() {
   const scrollProgress = useScrollProgress();
@@ -51,6 +52,7 @@ export default function Home() {
         <Projects />
         <Stats />
         <Testimonials />
+        <AuthSection />
         <Contact />
       </main>
       
