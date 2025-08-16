@@ -144,6 +144,10 @@
     animation: particle 20s linear infinite;
   }
 
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
   .parallax-container {
     height: 100vh;
     overflow-x: hidden;
@@ -200,19 +204,35 @@
     animation: gradient-shift 8s ease infinite;
   }
 
+  .premium-gradient.bg-clip-text {
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* Fallback color for better visibility */
+    color: hsl(var(--primary));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  }
+
+  /* Ensure text is visible in different themes */
+  .dark .premium-gradient.bg-clip-text {
+    color: hsl(var(--secondary));
+  }
+
   .text-visible {
     color: hsl(var(--foreground));
     opacity: 1;
   }
 
   .text-contrast {
-    color: hsl(var(--foreground));
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    color: hsl(var(--foreground)) !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+    opacity: 1 !important;
   }
 
   .dark .text-contrast {
-    color: hsl(var(--foreground));
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.1);
+    color: hsl(var(--foreground)) !important;
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.2) !important;
+    opacity: 1 !important;
   }
 
   .mesh-gradient {
@@ -320,11 +340,15 @@
 @keyframes pulse-glow {
   0%, 100% { 
     box-shadow: 0 0 20px hsl(var(--primary)/0.3);
+    text-shadow: 0 0 20px hsl(var(--primary)/0.5);
   }
   50% { 
     box-shadow: 0 0 40px hsl(var(--primary)/0.6), 0 0 60px hsl(var(--secondary)/0.3);
+    text-shadow: 0 0 30px hsl(var(--secondary)/0.7), 0 0 40px hsl(var(--primary)/0.5);
   }
 }
+
+
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
