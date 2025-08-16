@@ -16,7 +16,7 @@ export default function Hero() {
         <h1 className="font-poppins text-5xl md:text-7xl lg:text-8xl font-bold mb-6 animate-slide-up">
           <span className="block text-light-text dark:text-foreground">Hi, I'm</span>
           <span className="text-gradient animate-glow">
-            Developer
+            Hamd
           </span>
         </h1>
         

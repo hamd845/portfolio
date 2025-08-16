@@ -11,15 +11,15 @@ export default function Home() {
 
   useEffect(() => {
     // Set proper meta tags for SEO
-    document.title = "Portfolio - Premium Developer Experience";
+    document.title = "Hamd - Portfolio | Full Stack Developer";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'Premium personal portfolio showcasing modern web development projects with advanced animations and 3D effects');
+      metaDescription.setAttribute('content', 'Hamd\'s portfolio showcasing modern web development projects with React, Node.js, and advanced animations');
     }
     
     const metaKeywords = document.querySelector('meta[name="keywords"]');
     if (metaKeywords) {
-      metaKeywords.setAttribute('content', 'portfolio, web developer, React, Next.js, Three.js, modern design');
+      metaKeywords.setAttribute('content', 'Hamd, portfolio, web developer, React, Node.js, Three.js, TypeScript, modern design');
     }
   }, []);
 

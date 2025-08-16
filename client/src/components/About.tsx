@@ -5,7 +5,7 @@ const skills = [
   { name: "React/Next.js", percentage: 95, delay: 0 },
   { name: "Node.js/Express", percentage: 90, delay: 0.2 },
   { name: "Three.js/WebGL", percentage: 85, delay: 0.4 },
-  { name: "Python/AI", percentage: 80, delay: 0.6 },
+  { name: "TypeScript", percentage: 90, delay: 0.6 },
 ];
 
 export default function About() {

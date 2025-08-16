@@ -23,19 +23,19 @@ const projects = [
   },
   {
     id: 'project2',
-    title: 'AI Analytics Dashboard',
-    description: 'Advanced analytics dashboard with machine learning integration, real-time data processing, and interactive visualizations.',
+    title: 'Real-time Chat Application',
+    description: 'Modern chat application with real-time messaging, file sharing, and video calling capabilities built with Socket.io.',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400',
-    technologies: ['Python', 'React', 'D3.js'],
+    technologies: ['React', 'Socket.io', 'Node.js'],
     features: [
-      'Machine learning models integration',
-      'Real-time data processing',
-      'Interactive data visualizations',
-      'Predictive analytics',
-      'Custom reporting system',
-      'API integration capabilities'
+      'Real-time messaging',
+      'File and image sharing',
+      'Video calling with WebRTC',
+      'Group chat functionality',
+      'Message encryption',
+      'Mobile responsive design'
     ],
-    fullTechnologies: ['Python', 'React', 'D3.js', 'TensorFlow', 'FastAPI', 'PostgreSQL'],
+    fullTechnologies: ['React', 'Socket.io', 'Node.js', 'WebRTC', 'MongoDB', 'Express'],
     github: '#',
     demo: '#'
   },
