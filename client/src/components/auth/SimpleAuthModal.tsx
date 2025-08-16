@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useAuth } from '@/contexts/AuthContext';
+import { useToast } from '@/hooks/use-toast';
 
 interface SimpleAuthModalProps {
   isOpen: boolean;
@@ -15,24 +17,74 @@ interface SimpleAuthModalProps {
 export default function SimpleAuthModal({ isOpen, onClose, initialMode = 'signin' }: SimpleAuthModalProps) {
   const [mode, setMode] = useState<'signin' | 'signup'>(initialMode);
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     confirmPassword: ''
   });
+  
+  const { signIn, signUp } = useAuth();
+  const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     
     if (mode === 'signup' && formData.password !== formData.confirmPassword) {
-      alert('Passwords do not match');
+      toast({
+        title: 'Error',
+        description: 'Passwords do not match',
+        variant: 'destructive'
+      });
+      setIsLoading(false);
       return;
     }
 
-    // Simple auth simulation - in production this would use a proper auth service
-    alert(`${mode === 'signin' ? 'Sign In' : 'Sign Up'} successful! In production, this would authenticate with a proper backend service.`);
-    onClose();
+    try {
+      let success = false;
+      
+      if (mode === 'signin') {
+        success = await signIn(formData.email, formData.password);
+        if (success) {
+          toast({
+            title: 'Welcome back!',
+            description: 'You have successfully signed in.'
+          });
+          onClose();
+        } else {
+          toast({
+            title: 'Sign in failed',
+            description: 'Invalid email or password',
+            variant: 'destructive'
+          });
+        }
+      } else {
+        success = await signUp(formData.name, formData.email, formData.password);
+        if (success) {
+          toast({
+            title: 'Account created!',
+            description: 'Welcome! Your account has been created successfully.'
+          });
+          onClose();
+        } else {
+          toast({
+            title: 'Sign up failed',
+            description: 'An account with this email already exists',
+            variant: 'destructive'
+          });
+        }
+      }
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'Something went wrong. Please try again.',
+        variant: 'destructive'
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -169,9 +221,10 @@ export default function SimpleAuthModal({ isOpen, onClose, initialMode = 'signin
 
                 <Button
                   type="submit"
+                  disabled={isLoading}
                   className="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white font-medium py-3"
                 >
-                  {mode === 'signin' ? 'Sign In' : 'Create Account'}
+                  {isLoading ? 'Please wait...' : (mode === 'signin' ? 'Sign In' : 'Create Account')}
                 </Button>
               </form>
 

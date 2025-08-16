@@ -45,7 +45,7 @@ export default function AuthSection() {
             </span>
           </h2>
           <p className="text-white/80 dark:text-gray-700 text-xl max-w-3xl mx-auto leading-relaxed">
-            Secure user authentication and management system powered by Clerk.
+            Secure user authentication and management system with localStorage integration.
           </p>
         </motion.div>
 
