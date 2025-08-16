@@ -1,10 +1,13 @@
 import sgMail from '@sendgrid/mail';
 
-if (!process.env.SENDGRID_API_KEY) {
-  throw new Error("SENDGRID_API_KEY environment variable must be set");
-}
+const SENDGRID_ENABLED = !!process.env.SENDGRID_API_KEY;
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+if (SENDGRID_ENABLED) {
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
+  console.log('SendGrid email service enabled');
+} else {
+  console.warn('SENDGRID_API_KEY not found - email functionality will be disabled');
+}
 
 interface ContactFormData {
   name: string;
@@ -15,6 +18,11 @@ interface ContactFormData {
 }
 
 export async function sendContactEmail(formData: ContactFormData): Promise<boolean> {
+  if (!SENDGRID_ENABLED) {
+    console.log('Email sending skipped - SendGrid not configured');
+    return false;
+  }
+
   try {
     const emailContent = {
       to: 'aliyaanmohd42@gmail.com',
