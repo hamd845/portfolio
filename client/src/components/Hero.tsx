@@ -31,8 +31,8 @@ export default function Hero() {
         style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "60%"]) }} 
         className="absolute inset-0 opacity-20"
       >
-        <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-full blur-3xl animate-float-slow" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-accent/20 to-success/20 rounded-full blur-3xl animate-float-slow" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-accent/20 to-success/20 rounded-full blur-3xl" />
       </motion.div>
       
       {/* Hero Content */}
@@ -58,7 +58,11 @@ export default function Hero() {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.6, duration: 1, ease: "easeOut" }}
-            className="premium-gradient bg-clip-text text-transparent animate-pulse-glow font-serif"
+            className="text-white dark:text-gray-900 font-serif bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent filter drop-shadow-lg"
+            style={{ 
+              textShadow: '0 0 30px rgba(139, 69, 199, 0.8)',
+              WebkitTextStroke: '1px transparent'
+            }}
           >
             Hamd
           </motion.span>

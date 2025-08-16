@@ -1,11 +1,17 @@
 import Hero from "@/components/Hero";
 import About from "@/components/About";
+import Skills from "@/components/Skills";
+import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
+import Stats from "@/components/Stats";
+import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Navigation from "@/components/Navigation";
 import { useScrollProgress } from "@/hooks/use-scroll-progress";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
+import ScrollProgress from "@/components/ScrollProgress";
+import FloatingElements from "@/components/FloatingElements";
 
 export default function Home() {
   const scrollProgress = useScrollProgress();
@@ -31,18 +37,20 @@ export default function Home() {
       transition={{ duration: 0.5 }}
       className="min-h-screen bg-dark-bg dark:bg-background text-light-text dark:text-foreground overflow-x-hidden scroll-smooth"
     >
-      {/* Scroll Progress Indicator */}
-      <div 
-        className="scroll-indicator"
-        style={{ width: `${scrollProgress}%` }}
-      />
+      {/* Enhanced Scroll Progress Indicator */}
+      <ScrollProgress />
       
       <Navigation />
+      <FloatingElements />
       
-      <main>
+      <main className="relative">
         <Hero />
         <About />
+        <Skills />
+        <Experience />
         <Projects />
+        <Stats />
+        <Testimonials />
         <Contact />
       </main>
       

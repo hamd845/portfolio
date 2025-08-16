@@ -39,7 +39,10 @@ export default function Navigation() {
   const navItems = [
     { id: 'hero', label: 'Home' },
     { id: 'about', label: 'About' },
+    { id: 'skills', label: 'Skills' },
+    { id: 'experience', label: 'Experience' },
     { id: 'projects', label: 'Projects' },
+    { id: 'testimonials', label: 'Testimonials' },
     { id: 'contact', label: 'Contact' }
   ];
 
@@ -59,7 +62,7 @@ export default function Navigation() {
             whileHover={{ scale: 1.05 }}
             className="text-2xl font-display font-black"
           >
-            <span className="premium-gradient bg-clip-text text-transparent">
+            <span className="text-white dark:text-gray-900 font-bold text-shadow-lg">
               Hamd
             </span>
           </motion.div>

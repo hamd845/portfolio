@@ -118,7 +118,13 @@ export default function Contact() {
           className="text-center mb-20"
         >
           <h2 className="font-display text-5xl md:text-7xl font-black mb-6">
-            <span className="premium-gradient bg-clip-text text-transparent">Get In Touch</span>
+            <span className="text-white dark:text-gray-900 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent font-bold" 
+                  style={{ 
+                    filter: 'drop-shadow(0 2px 4px rgba(139, 69, 199, 0.6))',
+                    WebkitTextStroke: '1px transparent' 
+                  }}>
+              Get In Touch
+            </span>
           </h2>
           <p className="text-white/80 dark:text-gray-700 text-xl max-w-3xl mx-auto leading-relaxed text-contrast">
             Ready to bring your ideas to life? Let's discuss your next project and create something amazing together.

@@ -124,6 +124,30 @@
     animation: float 6s ease-in-out infinite;
   }
 
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+  }
+
+  .parallax-element {
+    will-change: transform;
+  }
+
+  /* Enhanced animations for better performance */
+  .enhanced-gradient {
+    background: linear-gradient(135deg, 
+      hsl(var(--primary)) 0%, 
+      hsl(var(--secondary)) 25%, 
+      hsl(var(--accent)) 50%, 
+      hsl(var(--success)) 75%, 
+      hsl(var(--primary)) 100%);
+    background-size: 400% 400%;
+    animation: gradient-shift 8s ease infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 8px rgba(139, 69, 199, 0.4));
+  }
+
   .animate-glow {
     animation: glow 2s ease-in-out infinite alternate;
   }
