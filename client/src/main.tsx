@@ -10,13 +10,30 @@ const queryClient = new QueryClient();
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 if (!PUBLISHABLE_KEY) {
-  throw new Error("Missing Clerk Publishable Key");
+  console.warn("Clerk publishable key not found. Authentication features will be disabled.");
 }
 
 createRoot(document.getElementById("root")!).render(
-  <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+  PUBLISHABLE_KEY ? (
+    <ClerkProvider 
+      publishableKey={PUBLISHABLE_KEY}
+      appearance={{
+        variables: {
+          colorPrimary: "#8B5CF6",
+          colorBackground: "#0F172A",
+          colorText: "#FFFFFF",
+          colorInputBackground: "rgba(255, 255, 255, 0.1)",
+          colorInputText: "#FFFFFF"
+        }
+      }}
+    >
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
+    </ClerkProvider>
+  ) : (
     <QueryClientProvider client={queryClient}>
       <App />
     </QueryClientProvider>
-  </ClerkProvider>
+  )
 );
