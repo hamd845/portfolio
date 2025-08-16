@@ -15,12 +15,21 @@ interface AuthContextType {
   isSignedIn: boolean;
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const AuthContext = createContext<AuthContextType | null>(null);
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+  if (!context) {
+    // During development/hot reload, provide a fallback
+    console.warn('useAuth called outside AuthProvider, providing fallback');
+    return {
+      user: null,
+      isLoading: false,
+      signIn: async () => false,
+      signUp: async () => false,
+      signOut: () => {},
+      isSignedIn: false
+    };
   }
   return context;
 };
@@ -32,19 +41,22 @@ interface AuthProviderProps {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   // Load user from localStorage on mount
   useEffect(() => {
-    const storedUser = localStorage.getItem('auth_user');
-    if (storedUser) {
-      try {
+    try {
+      const storedUser = localStorage.getItem('auth_user');
+      if (storedUser) {
         setUser(JSON.parse(storedUser));
-      } catch (error) {
-        console.error('Error parsing stored user:', error);
-        localStorage.removeItem('auth_user');
       }
+    } catch (error) {
+      console.error('Error parsing stored user:', error);
+      localStorage.removeItem('auth_user');
+    } finally {
+      setIsLoading(false);
+      setIsInitialized(true);
     }
-    setIsLoading(false);
   }, []);
 
   const signIn = async (email: string, password: string): Promise<boolean> => {
