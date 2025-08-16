@@ -6,25 +6,17 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
 
-// Use the Clerk publishable key from environment
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY || 
-                        // Fallback for server-side environment variable
-                        (typeof window === 'undefined' ? process.env.CLERK_PUBLISHABLE_KEY : undefined);
+// Get the Clerk publishable key from environment variable
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 if (!PUBLISHABLE_KEY) {
-  console.warn("Clerk publishable key not found. Authentication features will be disabled.");
+  throw new Error("Missing Clerk Publishable Key");
 }
 
 createRoot(document.getElementById("root")!).render(
-  PUBLISHABLE_KEY ? (
-    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
-      <QueryClientProvider client={queryClient}>
-        <App />
-      </QueryClientProvider>
-    </ClerkProvider>
-  ) : (
+  <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
     <QueryClientProvider client={queryClient}>
       <App />
     </QueryClientProvider>
-  )
+  </ClerkProvider>
 );
