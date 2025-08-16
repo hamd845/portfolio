@@ -1,10 +1,7 @@
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
-import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
-import Stats from "@/components/Stats";
-import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Navigation from "@/components/Navigation";
 import { useScrollProgress } from "@/hooks/use-scroll-progress";
@@ -12,7 +9,6 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import ScrollProgress from "@/components/ScrollProgress";
 import FloatingElements from "@/components/FloatingElements";
-import AuthSection from "@/components/auth/AuthSection";
 
 export default function Home() {
   const scrollProgress = useScrollProgress();
@@ -48,11 +44,7 @@ export default function Home() {
         <Hero />
         <About />
         <Skills />
-        <Experience />
         <Projects />
-        <Stats />
-        <Testimonials />
-        <AuthSection />
         <Contact />
       </main>
       
