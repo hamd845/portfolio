@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Github, ExternalLink } from "lucide-react";
+import { Github } from "lucide-react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
 import ProjectModal from "./ProjectModal";
@@ -22,8 +22,7 @@ const projects = [
       'Download progress tracking'
     ],
     fullTechnologies: ['React', 'Node.js', 'TypeScript', 'Express', 'MongoDB', 'PDF-lib', 'Multer', 'Sharp'],
-    github: '#',
-    demo: '#'
+    github: '#'
   },
   {
     id: 'project2',
@@ -40,8 +39,7 @@ const projects = [
       'SEO optimization'
     ],
     fullTechnologies: ['React', 'Next.js', 'Node.js', 'Express', 'MongoDB', 'Stripe API'],
-    github: '#',
-    demo: '#'
+    github: '#'
   },
   {
     id: 'project3',
@@ -58,8 +56,7 @@ const projects = [
       'Mobile responsive design'
     ],
     fullTechnologies: ['React', 'Socket.io', 'Node.js', 'WebRTC', 'MongoDB', 'Express'],
-    github: '#',
-    demo: '#'
+    github: '#'
   },
   {
     id: 'project4',
@@ -76,8 +73,7 @@ const projects = [
       'Mobile optimization'
     ],
     fullTechnologies: ['Three.js', 'WebGL', 'WebXR', 'Socket.io', 'Node.js', 'GLSL'],
-    github: '#',
-    demo: '#'
+    github: '#'
   }
 ];
 
@@ -171,17 +167,6 @@ export default function Projects() {
                         }}
                       >
                         <Github className="w-5 h-5" />
-                      </motion.button>
-                      <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="p-3 glass-morphism rounded-full text-white hover:text-primary transition-colors"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          window.open(project.demo, '_blank');
-                        }}
-                      >
-                        <ExternalLink className="w-5 h-5" />
                       </motion.button>
                     </div>
                   </motion.div>

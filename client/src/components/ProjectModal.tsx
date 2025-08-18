@@ -1,4 +1,4 @@
-import { X, Github, ExternalLink, Check } from "lucide-react";
+import { X, Github, Check } from "lucide-react";
 import { useEffect } from "react";
 
 interface ProjectModalProps {
@@ -9,7 +9,6 @@ interface ProjectModalProps {
     features: string[];
     fullTechnologies: string[];
     github: string;
-    demo: string;
   };
   onClose: () => void;
 }
@@ -102,14 +101,6 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               >
                 <Github className="w-4 h-4" />
                 <span>View Code</span>
-              </a>
-              <a 
-                href={project.demo}
-                className="px-6 py-3 border-2 border-primary text-primary rounded-lg font-semibold hover:bg-primary hover:text-white transition-all duration-300 flex items-center space-x-2"
-                data-testid="button-live-demo"
-              >
-                <ExternalLink className="w-4 h-4" />
-                <span>Live Demo</span>
               </a>
             </div>
           </div>

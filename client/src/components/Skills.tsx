@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
-import { Code2, Database, Globe, Smartphone, Server, Zap } from "lucide-react";
+import { Code2, Database, Globe, Server, Zap } from "lucide-react";
 
 export default function Skills() {
   const ref = useRef<HTMLDivElement>(null);
@@ -31,12 +31,6 @@ export default function Skills() {
       title: "Database & Cloud",
       skills: ["AWS", "Docker", "Redis", "GraphQL", "Supabase", "Vercel"],
       color: "from-orange-500 to-red-600"
-    },
-    {
-      icon: Smartphone,
-      title: "Mobile Development",
-      skills: ["React Native", "Flutter", "iOS", "Android", "Expo", "PWA"],
-      color: "from-purple-500 to-pink-600"
     },
     {
       icon: Globe,
