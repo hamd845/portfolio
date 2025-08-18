@@ -59,10 +59,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     try {
       // Get stored users from localStorage
       const storedUsers = localStorage.getItem('app_users');
+      console.log('Stored users:', storedUsers);
       const users = storedUsers ? JSON.parse(storedUsers) : [];
+      console.log('Parsed users:', users);
+      console.log('Trying to sign in with:', { email, password });
       
       // Find user with matching email and password
       const foundUser = users.find((u: any) => u.email === email && u.password === password);
+      console.log('Found user:', foundUser);
       
       if (foundUser) {
         const userToStore = {
@@ -72,8 +76,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         };
         setUser(userToStore);
         localStorage.setItem('auth_user', JSON.stringify(userToStore));
+        console.log('Sign in successful');
         return true;
       }
+      console.log('No matching user found');
       return false;
     } catch (error) {
       console.error('Sign in error:', error);
@@ -86,9 +92,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       // Get existing users from localStorage
       const storedUsers = localStorage.getItem('app_users');
       const users = storedUsers ? JSON.parse(storedUsers) : [];
+      console.log('Existing users:', users);
       
       // Check if user already exists
       if (users.find((u: any) => u.email === email)) {
+        console.log('User already exists');
         return false; // User already exists
       }
       
@@ -99,10 +107,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         email,
         password
       };
+      console.log('Creating new user:', { name, email, password });
       
       // Add to users array and save
       users.push(newUser);
       localStorage.setItem('app_users', JSON.stringify(users));
+      console.log('Saved users to localStorage:', users);
       
       // Set as current user
       const userToStore = {
@@ -112,6 +122,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       };
       setUser(userToStore);
       localStorage.setItem('auth_user', JSON.stringify(userToStore));
+      console.log('Sign up successful, user logged in');
       
       return true;
     } catch (error) {
