@@ -15,22 +15,20 @@ interface AuthContextType {
   isSignedIn: boolean;
 }
 
-const AuthContext = createContext<AuthContextType | null>(null);
+// Create a default context value to prevent undefined issues
+const defaultAuthContext: AuthContextType = {
+  user: null,
+  isLoading: true,
+  signIn: async () => false,
+  signUp: async () => false,
+  signOut: () => {},
+  isSignedIn: false
+};
+
+const AuthContext = createContext<AuthContextType>(defaultAuthContext);
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (!context) {
-    // During development/hot reload, provide a fallback
-    console.warn('useAuth called outside AuthProvider, providing fallback');
-    return {
-      user: null,
-      isLoading: false,
-      signIn: async () => false,
-      signUp: async () => false,
-      signOut: () => {},
-      isSignedIn: false
-    };
-  }
   return context;
 };
 
@@ -41,7 +39,6 @@ interface AuthProviderProps {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isInitialized, setIsInitialized] = useState(false);
 
   // Load user from localStorage on mount
   useEffect(() => {
@@ -55,7 +52,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       localStorage.removeItem('auth_user');
     } finally {
       setIsLoading(false);
-      setIsInitialized(true);
     }
   }, []);
 
