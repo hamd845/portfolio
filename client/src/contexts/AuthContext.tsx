@@ -62,9 +62,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       const storedUsers = localStorage.getItem('portfolio_app_users');
       const users = storedUsers ? JSON.parse(storedUsers) : [];
       
+      console.log('Stored users:', users);
+      console.log('Looking for:', { email: email.toLowerCase(), password });
+      
       const foundUser = users.find((u: any) => 
         u.email.toLowerCase() === email.toLowerCase() && u.password === password
       );
+      
+      console.log('Found user:', foundUser);
       
       if (foundUser) {
         const userToStore = {
@@ -74,8 +79,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         };
         setUser(userToStore);
         localStorage.setItem('portfolio_auth_user', JSON.stringify(userToStore));
+        console.log('Sign in successful');
         return true;
       }
+      console.log('No user found with those credentials');
       return false;
     } catch (error) {
       console.error('Sign in error:', error);
@@ -88,9 +95,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       const storedUsers = localStorage.getItem('portfolio_app_users');
       const users = storedUsers ? JSON.parse(storedUsers) : [];
       
+      console.log('Existing users before signup:', users);
+      console.log('Trying to create user:', { name, email: email.toLowerCase(), password });
+      
       // Check if user already exists
       const existingUser = users.find((u: any) => u.email.toLowerCase() === email.toLowerCase());
       if (existingUser) {
+        console.log('User already exists');
         return false;
       }
       
@@ -102,9 +113,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         password: password
       };
       
+      console.log('Creating new user:', newUser);
+      
       // Save to users array
       users.push(newUser);
       localStorage.setItem('portfolio_app_users', JSON.stringify(users));
+      
+      console.log('Users after signup:', users);
       
       // Log user in immediately
       const userToStore = {
@@ -115,6 +130,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       setUser(userToStore);
       localStorage.setItem('portfolio_auth_user', JSON.stringify(userToStore));
       
+      console.log('User signed up and logged in successfully');
       return true;
     } catch (error) {
       console.error('Sign up error:', error);
