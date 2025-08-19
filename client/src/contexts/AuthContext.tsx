@@ -15,20 +15,21 @@ interface AuthContextType {
   isSignedIn: boolean;
 }
 
-// Create a default context value to prevent undefined issues
-const defaultAuthContext: AuthContextType = {
-  user: null,
-  isLoading: true,
-  signIn: async () => false,
-  signUp: async () => false,
-  signOut: () => {},
-  isSignedIn: false
-};
-
-const AuthContext = createContext<AuthContextType>(defaultAuthContext);
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
+  if (context === undefined) {
+    // Provide safe fallback during development hot-reload
+    return {
+      user: null,
+      isLoading: false,
+      signIn: async () => false,
+      signUp: async () => false,
+      signOut: () => {},
+      isSignedIn: false
+    };
+  }
   return context;
 };
 
@@ -43,13 +44,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   // Load user from localStorage on mount
   useEffect(() => {
     try {
-      const storedUser = localStorage.getItem('auth_user');
+      const storedUser = localStorage.getItem('portfolio_auth_user');
       if (storedUser) {
-        setUser(JSON.parse(storedUser));
+        const parsedUser = JSON.parse(storedUser);
+        setUser(parsedUser);
       }
     } catch (error) {
-      console.error('Error parsing stored user:', error);
-      localStorage.removeItem('auth_user');
+      console.error('Error loading user:', error);
+      localStorage.removeItem('portfolio_auth_user');
     } finally {
       setIsLoading(false);
     }
@@ -57,16 +59,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const signIn = async (email: string, password: string): Promise<boolean> => {
     try {
-      // Get stored users from localStorage
-      const storedUsers = localStorage.getItem('app_users');
-      console.log('Stored users:', storedUsers);
+      const storedUsers = localStorage.getItem('portfolio_app_users');
       const users = storedUsers ? JSON.parse(storedUsers) : [];
-      console.log('Parsed users:', users);
-      console.log('Trying to sign in with:', { email, password });
       
-      // Find user with matching email and password
-      const foundUser = users.find((u: any) => u.email === email && u.password === password);
-      console.log('Found user:', foundUser);
+      const foundUser = users.find((u: any) => 
+        u.email.toLowerCase() === email.toLowerCase() && u.password === password
+      );
       
       if (foundUser) {
         const userToStore = {
@@ -75,11 +73,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           email: foundUser.email
         };
         setUser(userToStore);
-        localStorage.setItem('auth_user', JSON.stringify(userToStore));
-        console.log('Sign in successful');
+        localStorage.setItem('portfolio_auth_user', JSON.stringify(userToStore));
         return true;
       }
-      console.log('No matching user found');
       return false;
     } catch (error) {
       console.error('Sign in error:', error);
@@ -89,40 +85,35 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const signUp = async (name: string, email: string, password: string): Promise<boolean> => {
     try {
-      // Get existing users from localStorage
-      const storedUsers = localStorage.getItem('app_users');
+      const storedUsers = localStorage.getItem('portfolio_app_users');
       const users = storedUsers ? JSON.parse(storedUsers) : [];
-      console.log('Existing users:', users);
       
       // Check if user already exists
-      if (users.find((u: any) => u.email === email)) {
-        console.log('User already exists');
-        return false; // User already exists
+      const existingUser = users.find((u: any) => u.email.toLowerCase() === email.toLowerCase());
+      if (existingUser) {
+        return false;
       }
       
       // Create new user
       const newUser = {
-        id: Date.now().toString(), // Simple ID generation
-        name,
-        email,
-        password
+        id: `user_${Date.now()}`,
+        name: name.trim(),
+        email: email.toLowerCase().trim(),
+        password: password
       };
-      console.log('Creating new user:', { name, email, password });
       
-      // Add to users array and save
+      // Save to users array
       users.push(newUser);
-      localStorage.setItem('app_users', JSON.stringify(users));
-      console.log('Saved users to localStorage:', users);
+      localStorage.setItem('portfolio_app_users', JSON.stringify(users));
       
-      // Set as current user
+      // Log user in immediately
       const userToStore = {
         id: newUser.id,
         name: newUser.name,
         email: newUser.email
       };
       setUser(userToStore);
-      localStorage.setItem('auth_user', JSON.stringify(userToStore));
-      console.log('Sign up successful, user logged in');
+      localStorage.setItem('portfolio_auth_user', JSON.stringify(userToStore));
       
       return true;
     } catch (error) {
@@ -133,7 +124,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const signOut = () => {
     setUser(null);
-    localStorage.removeItem('auth_user');
+    localStorage.removeItem('portfolio_auth_user');
   };
 
   const value: AuthContextType = {
@@ -145,5 +136,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     isSignedIn: !!user
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
