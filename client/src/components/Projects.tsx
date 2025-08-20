@@ -400,6 +400,7 @@ export default function Projects() {
   // Removed heavy animations for better performance
 
   const openProject = (project: typeof projects[0]) => {
+    console.log('Opening project:', project.title);
     setSelectedProject(project);
   };
 
