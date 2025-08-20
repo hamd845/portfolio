@@ -86,10 +86,7 @@ export default function Projects() {
     offset: ["start end", "end start"]
   });
   
-  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
-  const y = useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "30%"]), springConfig);
-  const backgroundY = useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "60%"]), springConfig);
-  const cardY = useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "15%"]), springConfig);
+  // Removed heavy animations for better performance
 
   const openProject = (project: typeof projects[0]) => {
     setSelectedProject(project);
@@ -101,16 +98,13 @@ export default function Projects() {
 
   return (
     <section ref={ref} id="projects" className="py-32 px-4 relative overflow-hidden bg-dark-card/10 dark:bg-gray-50/5">
-      {/* Parallax Background */}
-      <motion.div 
-        style={{ y: backgroundY }}
-        className="absolute inset-0 opacity-5"
-      >
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-primary to-secondary rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-br from-accent to-success rounded-full blur-3xl" />
-      </motion.div>
+      {/* Simple Background */}
+      <div className="absolute inset-0 opacity-3">
+        <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-gradient-to-br from-primary to-secondary rounded-full blur-2xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-br from-accent to-success rounded-full blur-2xl" />
+      </div>
 
-      <motion.div style={{ y }} className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -126,7 +120,7 @@ export default function Projects() {
           </p>
         </motion.div>
         
-        <motion.div style={{ y: cardY }} className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
             <motion.div 
               key={project.id}
@@ -206,8 +200,8 @@ export default function Projects() {
               </div>
             </motion.div>
           ))}
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
       
       {selectedProject && (
         <ProjectModal 

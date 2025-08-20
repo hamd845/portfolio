@@ -72,10 +72,7 @@ export default function Skills() {
           </p>
         </motion.div>
 
-        <motion.div 
-          style={{ y }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {skillCategories.map((category, index) => (
             <motion.div 
               key={category.title}
@@ -114,7 +111,7 @@ export default function Skills() {
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

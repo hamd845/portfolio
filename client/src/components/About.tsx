@@ -18,23 +18,17 @@ export default function About() {
     offset: ["start end", "end start"]
   });
   
-  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
-  const y = useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "40%"]), springConfig);
-  const backgroundY = useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "70%"]), springConfig);
-  const textY = useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "20%"]), springConfig);
+  // Removed heavy animations for better performance
 
   return (
     <section id="about" className="py-32 px-4 relative overflow-hidden" ref={ref}>
-      {/* Parallax Background */}
-      <motion.div 
-        style={{ y: backgroundY }}
-        className="absolute inset-0 opacity-10"
-      >
-        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-primary to-secondary rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-br from-accent to-success rounded-full blur-3xl" />
-      </motion.div>
+      {/* Simple Background */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-0 left-0 w-80 h-80 bg-gradient-to-br from-primary to-secondary rounded-full blur-2xl" />
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-br from-accent to-success rounded-full blur-2xl" />
+      </div>
 
-      <motion.div style={{ y: textY }} className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -126,7 +120,7 @@ export default function About() {
             </div>
           </motion.div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
