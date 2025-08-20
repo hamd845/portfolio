@@ -59,30 +59,24 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const signIn = async (email: string, password: string): Promise<boolean> => {
     try {
-      const storedUsers = localStorage.getItem('portfolio_app_users');
-      const users = storedUsers ? JSON.parse(storedUsers) : [];
-      
-      console.log('Stored users:', users);
-      console.log('Looking for:', { email: email.toLowerCase(), password });
-      
-      const foundUser = users.find((u: any) => 
-        u.email.toLowerCase() === email.toLowerCase() && u.password === password
-      );
-      
-      console.log('Found user:', foundUser);
-      
-      if (foundUser) {
-        const userToStore = {
-          id: foundUser.id,
-          name: foundUser.name,
-          email: foundUser.email
-        };
-        setUser(userToStore);
-        localStorage.setItem('portfolio_auth_user', JSON.stringify(userToStore));
-        console.log('Sign in successful');
+      const response = await fetch('/api/auth/signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email.toLowerCase(),
+          password
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success && data.user) {
+        setUser(data.user);
+        localStorage.setItem('portfolio_auth_user', JSON.stringify(data.user));
         return true;
       }
-      console.log('No user found with those credentials');
       return false;
     } catch (error) {
       console.error('Sign in error:', error);
@@ -92,46 +86,26 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const signUp = async (name: string, email: string, password: string): Promise<boolean> => {
     try {
-      const storedUsers = localStorage.getItem('portfolio_app_users');
-      const users = storedUsers ? JSON.parse(storedUsers) : [];
-      
-      console.log('Existing users before signup:', users);
-      console.log('Trying to create user:', { name, email: email.toLowerCase(), password });
-      
-      // Check if user already exists
-      const existingUser = users.find((u: any) => u.email.toLowerCase() === email.toLowerCase());
-      if (existingUser) {
-        console.log('User already exists');
-        return false;
+      const response = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.toLowerCase().trim(),
+          password
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success && data.user) {
+        setUser(data.user);
+        localStorage.setItem('portfolio_auth_user', JSON.stringify(data.user));
+        return true;
       }
-      
-      // Create new user
-      const newUser = {
-        id: `user_${Date.now()}`,
-        name: name.trim(),
-        email: email.toLowerCase().trim(),
-        password: password
-      };
-      
-      console.log('Creating new user:', newUser);
-      
-      // Save to users array
-      users.push(newUser);
-      localStorage.setItem('portfolio_app_users', JSON.stringify(users));
-      
-      console.log('Users after signup:', users);
-      
-      // Log user in immediately
-      const userToStore = {
-        id: newUser.id,
-        name: newUser.name,
-        email: newUser.email
-      };
-      setUser(userToStore);
-      localStorage.setItem('portfolio_auth_user', JSON.stringify(userToStore));
-      
-      console.log('User signed up and logged in successfully');
-      return true;
+      return false;
     } catch (error) {
       console.error('Sign up error:', error);
       return false;
@@ -141,6 +115,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const signOut = () => {
     setUser(null);
     localStorage.removeItem('portfolio_auth_user');
+    // Clean up any legacy localStorage keys
+    localStorage.removeItem('portfolio_app_users');
   };
 
   const value: AuthContextType = {
