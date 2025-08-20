@@ -31,7 +31,6 @@ export default function About() {
   });
 
   const backgroundY = useTransform(smoothProgress, [0, 1], ["0%", "20%"]);
-  const imageY = useTransform(smoothProgress, [0, 1], ["0%", "-15%"]);
   const textY = useTransform(smoothProgress, [0, 1], ["0%", "10%"]);
 
   return (
@@ -80,37 +79,12 @@ export default function About() {
           </p>
         </div>
         
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
-          {/* Profile Section with Parallax */}
+        <div className="max-w-4xl mx-auto">
+          {/* Skills & Info - Centered Layout */}
           <motion.div 
-            style={{ y: imageY }}
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="relative"
-          >
-            <div className="relative group">
-              <img 
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=800" 
-                alt="Professional developer profile" 
-                className="rounded-3xl shadow-xl w-full max-w-lg mx-auto bg-white/5 p-1 hover:shadow-2xl transition-shadow duration-200"
-                data-testid="img-profile"
-              />
-              
-              <motion.div 
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute -top-6 -right-6 w-32 h-32 bg-primary rounded-full opacity-30 blur-xl"
-              />
-            </div>
-          </motion.div>
-          
-          {/* Skills & Info */}
-          <motion.div 
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
             className="space-y-10"
           >
