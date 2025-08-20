@@ -66,12 +66,12 @@ export default function Skills() {
           ref={titleRef as any}
           className="text-center mb-20 scroll-effect-scale"
         >
-          <h2 className="font-heading text-5xl md:text-7xl font-black mb-6">
-            <span className="text-gradient-primary">
+          <h2 className="font-heading text-5xl md:text-7xl font-black mb-6 text-white dark:text-gray-900">
+            <span className="text-gradient-hero">
               Skills & Expertise
             </span>
           </h2>
-          <p className="text-white/80 dark:text-gray-700 text-xl max-w-3xl mx-auto leading-relaxed">
+          <p className="text-white/80 dark:text-gray-700 text-xl max-w-3xl mx-auto leading-relaxed text-contrast">
             Comprehensive technical skills across the full development stack, from design to deployment.
           </p>
         </div>

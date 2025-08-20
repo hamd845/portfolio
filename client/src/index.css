@@ -228,6 +228,17 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 100% 100%;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+  }
+  
+  .dark .text-gradient-hero {
+    background: linear-gradient(135deg, #A78BFA 0%, #22D3EE 25%, #34D399 50%, #FBBF24 75%, #F87171 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 100% 100%;
+    filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.1));
   }
   
   .text-gradient-cool {
