@@ -1,21 +1,101 @@
 import { ChevronDown } from "lucide-react";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { useRef } from "react";
 
 export default function Hero() {
   const { scrollToSection } = useSmoothScroll();
+  const ref = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  const backgroundY = useTransform(smoothProgress, [0, 1], ["0%", "30%"]);
+  const textY = useTransform(smoothProgress, [0, 1], ["0%", "15%"]);
+  const ornamentY = useTransform(smoothProgress, [0, 1], ["0%", "-20%"]);
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden scroll-optimized">
+    <section ref={ref} id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden scroll-optimized">
       
-      {/* Simplified Background */}
-      <div className="absolute inset-0 mesh-gradient opacity-30" />
-      <div className="absolute inset-0 opacity-15">
-        <div className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full blur-2xl" />
-        <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-r from-accent/15 to-success/15 rounded-full blur-2xl" />
-      </div>
+      {/* Parallax Background Elements */}
+      <motion.div 
+        style={{ y: backgroundY }}
+        className="absolute inset-0 mesh-gradient opacity-30" 
+      />
+      <motion.div 
+        style={{ y: backgroundY }}
+        className="absolute inset-0 opacity-15"
+      >
+        <motion.div 
+          className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full blur-2xl"
+          animate={{ 
+            scale: [1, 1.1, 1],
+            rotate: [0, 90, 0] 
+          }}
+          transition={{ 
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-r from-accent/15 to-success/15 rounded-full blur-2xl"
+          animate={{ 
+            scale: [1, 1.2, 1],
+            rotate: [0, -120, 0] 
+          }}
+          transition={{ 
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+      </motion.div>
+
+      {/* Floating Ornaments */}
+      <motion.div
+        style={{ y: ornamentY }}
+        className="absolute inset-0 pointer-events-none"
+      >
+        <motion.div 
+          className="absolute top-1/4 right-1/4 w-16 h-16 border border-primary/30 rounded-lg"
+          animate={{ 
+            rotate: [0, 360],
+            opacity: [0.3, 0.7, 0.3]
+          }}
+          transition={{ 
+            duration: 10,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-1/3 left-1/6 w-12 h-12 bg-gradient-to-br from-secondary/20 to-accent/20 rounded-full"
+          animate={{ 
+            y: [0, -20, 0],
+            opacity: [0.5, 1, 0.5]
+          }}
+          transition={{ 
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+      </motion.div>
       
-      {/* Hero Content */}
-      <div className="relative z-20 text-center px-4 max-w-6xl mx-auto">
+      {/* Hero Content with Parallax */}
+      <motion.div 
+        style={{ y: textY }}
+        className="relative z-20 text-center px-4 max-w-6xl mx-auto"
+      >
         <h1 className="font-heading text-6xl md:text-8xl lg:text-9xl font-black mb-8 leading-tight">
           <span className="block text-gradient-cool mb-4 font-medium">
             Hi, I'm
@@ -50,7 +130,7 @@ export default function Hero() {
             Download Resume
           </a>
         </div>
-      </div>
+      </motion.div>
       
       {/* Simple Scroll Indicator */}
       <div 

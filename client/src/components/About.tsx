@@ -23,16 +23,49 @@ export default function About() {
     target: ref,
     offset: ["start end", "end start"]
   });
-  
-  // Removed heavy animations for better performance
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  const backgroundY = useTransform(smoothProgress, [0, 1], ["0%", "20%"]);
+  const imageY = useTransform(smoothProgress, [0, 1], ["0%", "-15%"]);
+  const textY = useTransform(smoothProgress, [0, 1], ["0%", "10%"]);
 
   return (
     <section id="about" className="py-32 px-4 relative overflow-hidden min-h-screen scroll-optimized" ref={ref}>
-      {/* Simple Background */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 left-0 w-80 h-80 bg-gradient-to-br from-primary to-secondary rounded-full blur-2xl" />
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-br from-accent to-success rounded-full blur-2xl" />
-      </div>
+      {/* Parallax Background */}
+      <motion.div 
+        style={{ y: backgroundY }}
+        className="absolute inset-0 opacity-5"
+      >
+        <motion.div 
+          className="absolute top-0 left-0 w-80 h-80 bg-gradient-to-br from-primary to-secondary rounded-full blur-2xl"
+          animate={{ 
+            scale: [1, 1.1, 1],
+            rotate: [0, 90, 0] 
+          }}
+          transition={{ 
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-0 right-0 w-80 h-80 bg-gradient-to-br from-accent to-success rounded-full blur-2xl"
+          animate={{ 
+            scale: [1, 1.2, 1],
+            rotate: [0, -120, 0] 
+          }}
+          transition={{ 
+            duration: 18,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+      </motion.div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div 
@@ -48,8 +81,9 @@ export default function About() {
         </div>
         
         <div className="grid lg:grid-cols-2 gap-20 items-center">
-          {/* Profile Section */}
+          {/* Profile Section with Parallax */}
           <motion.div 
+            style={{ y: imageY }}
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}

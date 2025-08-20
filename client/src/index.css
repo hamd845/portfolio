@@ -108,6 +108,63 @@
     overflow-y: auto;
   }
 
+  /* Parallax Performance Optimizations */
+  .parallax-element {
+    will-change: transform;
+    backface-visibility: hidden;
+    perspective: 1000px;
+    transform: translateZ(0);
+  }
+
+  .parallax-smooth {
+    transition: transform 0.1s ease-out;
+  }
+
+  /* Enhanced scroll effects for parallax */
+  .scroll-effect-parallax {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .scroll-effect-parallax.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Optimized animations for better performance */
+  @media (prefers-reduced-motion: no-preference) {
+    .parallax-bg {
+      animation: float 20s ease-in-out infinite;
+    }
+
+    .parallax-ornament {
+      animation: orbit 15s linear infinite;
+    }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+  }
+
+  @keyframes orbit {
+    0% { transform: rotate(0deg) translateX(50px) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(50px) rotate(-360deg); }
+  }
+
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .parallax-element {
+      transform: none !important;
+    }
+    
+    .parallax-bg,
+    .parallax-ornament {
+      animation: none !important;
+    }
+  }
+
   /* Smooth scroll effects */
   .scroll-effect-fade {
     opacity: 0;

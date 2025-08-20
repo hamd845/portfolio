@@ -4,6 +4,8 @@ import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import Navigation from "@/components/Navigation";
+import ParallaxBackground from "@/components/ParallaxBackground";
+import ParallaxWrapper from "@/components/ParallaxWrapper";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import FloatingElements from "@/components/FloatingElements";
@@ -31,31 +33,50 @@ export default function Home() {
       transition={{ duration: 0.5 }}
       className="min-h-screen bg-dark-bg dark:bg-background text-light-text dark:text-foreground overflow-x-hidden scroll-smooth"
     >
+      {/* Parallax Background Layer */}
+      <ParallaxBackground />
+      
       <Navigation />
       <FloatingElements />
       
-      {/* Main Content Sections */}
-      <main>
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Contact />
+      {/* Main Content Sections with Parallax */}
+      <main className="relative z-10">
+        <ParallaxWrapper speed={0.3} direction="up">
+          <Hero />
+        </ParallaxWrapper>
         
-        {/* Footer */}
-        <footer className="py-12 px-4 border-t border-gray-700/20 dark:border-gray-200/20">
-          <div className="max-w-7xl mx-auto text-center">
-            <div className="font-display text-2xl font-bold mb-4">
-              <span className="text-gradient-hero">Hamd</span>
+        <ParallaxWrapper speed={0.5} direction="down">
+          <About />
+        </ParallaxWrapper>
+        
+        <ParallaxWrapper speed={0.4} direction="up">
+          <Skills />
+        </ParallaxWrapper>
+        
+        <ParallaxWrapper speed={0.6} direction="down">
+          <Projects />
+        </ParallaxWrapper>
+        
+        <ParallaxWrapper speed={0.3} direction="up">
+          <Contact />
+        </ParallaxWrapper>
+        
+        {/* Footer with Parallax */}
+        <ParallaxWrapper speed={0.2} direction="down">
+          <footer className="py-12 px-4 border-t border-gray-700/20 dark:border-gray-200/20">
+            <div className="max-w-7xl mx-auto text-center">
+              <div className="font-display text-2xl font-bold mb-4">
+                <span className="text-gradient-hero">Hamd</span>
+              </div>
+              <p className="text-gray-400 dark:text-gray-600 mb-6">
+                Building the future, one line of code at a time.
+              </p>
+              <p className="text-sm text-gray-500">
+                © 2024 Portfolio. All rights reserved. Designed & Developed with ❤️
+              </p>
             </div>
-            <p className="text-gray-400 dark:text-gray-600 mb-6">
-              Building the future, one line of code at a time.
-            </p>
-            <p className="text-sm text-gray-500">
-              © 2024 Portfolio. All rights reserved. Designed & Developed with ❤️
-            </p>
-          </div>
-        </footer>
+          </footer>
+        </ParallaxWrapper>
       </main>
     </motion.div>
   );
