@@ -22,7 +22,7 @@ export default function Skills() {
     {
       icon: Server,
       title: "Backend Development", 
-      skills: ["Node.js", "Python", "Express", "FastAPI", "PostgreSQL", "MongoDB"],
+      skills: ["Node.js", "Python", "Express", "FastAPI", "MySQL", "PostgreSQL", "MongoDB"],
       color: "from-green-500 to-teal-600"
     },
     {
