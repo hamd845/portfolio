@@ -108,24 +108,60 @@
     overflow-y: hidden;
   }
 
-  /* Scroll Hijacking Styles */
+  /* Enhanced Scroll Hijacking Styles */
   .scroll-hijacked-container {
     height: 100vh;
     overflow-y: auto;
     scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
   }
 
   .scroll-hijacked-container section {
     min-height: 100vh;
     scroll-snap-align: start;
     scroll-snap-stop: always;
+    position: relative;
   }
 
-  /* Optimized scrolling performance */
+  /* Advanced performance optimizations */
   .scroll-hijacked-container * {
     transform: translateZ(0);
     backface-visibility: hidden;
     perspective: 1000px;
+  }
+
+  /* Smooth scroll effects */
+  .scroll-effect-fade {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .scroll-effect-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scroll-effect-slide {
+    transform: translateX(-100px);
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .scroll-effect-slide.visible {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .scroll-effect-scale {
+    transform: scale(0.8);
+    opacity: 0;
+    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .scroll-effect-scale.visible {
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
@@ -195,15 +231,33 @@
     will-change: transform;
   }
 
-  /* Performance optimizations for hijacked scrolling */
+  /* Advanced performance optimizations */
   .scroll-optimized {
     contain: layout style paint;
     will-change: transform;
+    transform: translateZ(0);
   }
 
   .gpu-accelerated {
     transform: translateZ(0);
     backface-visibility: hidden;
+    will-change: transform;
+  }
+
+  /* Parallax effects */
+  .parallax-bg {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+
+  .parallax-text {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+
+  /* Smooth transitions */
+  .section-transition {
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   /* Enhanced animations for better performance */

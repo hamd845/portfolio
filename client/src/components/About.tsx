@@ -1,4 +1,5 @@
 import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
+import { useScrollEffects, useStaggeredScrollEffects } from "@/hooks/use-scroll-effects";
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
@@ -12,6 +13,11 @@ const skills = [
 export default function About() {
   const ref = useRef<HTMLDivElement>(null);
   const isVisible = useIntersectionObserver(ref, { threshold: 0.1 });
+  const titleRef = useScrollEffects({ effectClass: 'scroll-effect-fade' });
+  const skillsRef = useStaggeredScrollEffects('.skill-item', { 
+    effectClass: 'scroll-effect-slide',
+    staggerDelay: 150 
+  });
   
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -29,12 +35,9 @@ export default function About() {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <motion.div 
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-20"
+        <div 
+          ref={titleRef as any}
+          className="text-center mb-20 scroll-effect-fade"
         >
           <h2 className="font-heading text-5xl md:text-7xl font-black mb-6">
             <span className="text-gradient-cool">About Me</span>
@@ -42,7 +45,7 @@ export default function About() {
           <p className="text-white/80 dark:text-gray-700 text-xl max-w-3xl mx-auto leading-relaxed text-contrast">
             Passionate developer with expertise in modern web technologies and a love for creating innovative solutions.
           </p>
-        </motion.div>
+        </div>
         
         <div className="grid lg:grid-cols-2 gap-20 items-center">
           {/* Profile Section */}

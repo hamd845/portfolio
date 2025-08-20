@@ -1,9 +1,16 @@
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
+import { useScrollEffects, useStaggeredScrollEffects } from "@/hooks/use-scroll-effects";
 import { Code2, Database, Globe, Server, Zap } from "lucide-react";
 
 export default function Skills() {
   const ref = useRef<HTMLDivElement>(null);
+  const titleRef = useScrollEffects({ effectClass: 'scroll-effect-scale' });
+  const cardsRef = useStaggeredScrollEffects('.skill-card', { 
+    effectClass: 'scroll-effect-fade',
+    staggerDelay: 100 
+  });
+  
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"]
@@ -55,12 +62,9 @@ export default function Skills() {
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <motion.div 
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-20"
+        <div 
+          ref={titleRef as any}
+          className="text-center mb-20 scroll-effect-scale"
         >
           <h2 className="font-heading text-5xl md:text-7xl font-black mb-6">
             <span className="text-gradient-primary">
@@ -70,18 +74,14 @@ export default function Skills() {
           <p className="text-white/80 dark:text-gray-700 text-xl max-w-3xl mx-auto leading-relaxed">
             Comprehensive technical skills across the full development stack, from design to deployment.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div ref={cardsRef as any} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {skillCategories.map((category, index) => (
             <motion.div 
               key={category.title}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.6 }}
-              viewport={{ once: true }}
               whileHover={{ y: -2 }}
-              className="glass-morphism rounded-3xl p-8 backdrop-blur-xl border border-white/10 group"
+              className="skill-card glass-morphism rounded-3xl p-8 backdrop-blur-xl border border-white/10 group scroll-effect-fade"
             >
               <div className={`w-16 h-16 bg-gradient-to-br ${category.color} rounded-2xl flex items-center justify-center mb-6 shadow-lg hover:shadow-xl transition-shadow duration-150`}>
                 <category.icon className="w-8 h-8 text-white" />
