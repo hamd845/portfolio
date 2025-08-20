@@ -1,32 +1,16 @@
-import { useState } from "react";
 import { Github } from "lucide-react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
-import ProjectModal from "./ProjectModal";
 
-// Fallback image component
-const ProjectImage = ({ src, alt, className }: { src: string; alt: string; className: string }) => {
-  const [imageError, setImageError] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
-
-  const fallbackImage = "https://via.placeholder.com/800x400/2563eb/ffffff?text=Project+Preview";
-
-  return (
-    <div className="relative">
-      {!imageLoaded && (
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 animate-pulse rounded" />
-      )}
-      <img 
-        src={imageError ? fallbackImage : src}
-        alt={alt}
-        className={className}
-        onError={() => setImageError(true)}
-        onLoad={() => setImageLoaded(true)}
-        loading="lazy"
-      />
-    </div>
-  );
-};
+// Simple image component for projects
+const ProjectImage = ({ src, alt, className }: { src: string; alt: string; className: string }) => (
+  <img 
+    src={src}
+    alt={alt}
+    className={className}
+    loading="lazy"
+  />
+);
 
 const projects = [
   {
@@ -389,23 +373,12 @@ const projects = [
 ];
 
 export default function Projects() {
-  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
   const ref = useRef<HTMLDivElement>(null);
   
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"]
   });
-  
-  // Removed heavy animations for better performance
-
-  const openProject = (project: typeof projects[0]) => {
-    setSelectedProject(project);
-  };
-
-  const closeProject = () => {
-    setSelectedProject(null);
-  };
 
   return (
     <section ref={ref} id="projects" className="py-32 px-4 relative overflow-hidden bg-dark-card/10 dark:bg-gray-50/5 min-h-screen scroll-optimized">
@@ -440,8 +413,7 @@ export default function Projects() {
               transition={{ delay: index * 0.1, duration: 0.6 }}
               viewport={{ once: true }}
               whileHover={{ y: -3 }}
-              className="group cursor-pointer"
-              onClick={() => openProject(project)}
+              className="group"
               data-testid={`card-${project.id}`}
             >
               <div className="glass-morphism rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-200">
@@ -490,23 +462,13 @@ export default function Projects() {
                       </span>
                     ))}
                   </div>
-                  <div className="text-primary hover:text-secondary transition-colors duration-150 font-semibold flex items-center space-x-2">
-                    <span>View Details</span>
-                    <span className="group-hover:translate-x-1 transition-transform duration-150">→</span>
-                  </div>
+
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
-      
-      {selectedProject && (
-        <ProjectModal 
-          project={selectedProject}
-          onClose={closeProject}
-        />
-      )}
     </section>
   );
 }

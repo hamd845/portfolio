@@ -114,7 +114,7 @@ export default function Contact() {
           className="text-center mb-20"
         >
           <h2 className="font-display text-5xl md:text-7xl font-black mb-6">
-            <span className="text-white dark:text-gray-900 font-bold">
+            <span className="text-gradient-hero">
               Get In Touch
             </span>
           </h2>
