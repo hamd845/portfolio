@@ -41,6 +41,7 @@ export default function Navigation() {
     { id: 'about', label: 'About' },
     { id: 'skills', label: 'Skills' },
     { id: 'projects', label: 'Projects' },
+    { id: 'social', label: 'Social' },
     { id: 'contact', label: 'Contact' }
   ];
 

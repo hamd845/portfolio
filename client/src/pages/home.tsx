@@ -2,6 +2,7 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
+import SocialMedia from "@/components/SocialMedia";
 import Contact from "@/components/Contact";
 import Navigation from "@/components/Navigation";
 import ParallaxBackground from "@/components/ParallaxBackground";
@@ -57,7 +58,11 @@ export default function Home() {
           <Projects />
         </ParallaxWrapper>
         
-        <ParallaxWrapper speed={0.3} direction="up">
+        <ParallaxWrapper speed={0.4} direction="up">
+          <SocialMedia />
+        </ParallaxWrapper>
+        
+        <ParallaxWrapper speed={0.3} direction="down">
           <Contact />
         </ParallaxWrapper>
         

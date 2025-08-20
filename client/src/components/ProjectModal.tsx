@@ -13,9 +13,7 @@ interface ProjectModalProps {
   onClose: () => void;
 }
 
-export default function ProjectModal({ project, onClose }: ProjectModalProps) {
-  console.log('ProjectModal rendered for:', project.title);
-  
+export default function ProjectModal({ project, onClose }: ProjectModalProps) {  
   useEffect(() => {
     // Disable body scroll when modal is open
     document.body.style.overflow = 'hidden';
