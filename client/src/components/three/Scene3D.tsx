@@ -10,64 +10,48 @@ export default function Scene3D() {
   useEffect(() => {
     if (!mountRef.current) return;
 
-    // Scene setup
+    // Scene setup with performance optimizations
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    const renderer = new THREE.WebGLRenderer({ 
+      alpha: true, 
+      antialias: false, // Disable antialiasing for better performance
+      powerPreference: "high-performance"
+    });
     
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Limit pixel ratio for performance
     mountRef.current.appendChild(renderer.domElement);
 
-    // Create floating geometric shapes
-    const geometry1 = new THREE.OctahedronGeometry(0.8);
-    const geometry2 = new THREE.TetrahedronGeometry(0.6);
-    const geometry3 = new THREE.IcosahedronGeometry(0.5);
+    // Create simplified geometric shapes with basic materials for better performance
+    const geometry1 = new THREE.OctahedronGeometry(0.6);
+    const geometry2 = new THREE.TetrahedronGeometry(0.4);
 
-    const material1 = new THREE.MeshPhysicalMaterial({
+    // Use simpler MeshLambertMaterial instead of MeshPhysicalMaterial
+    const material1 = new THREE.MeshLambertMaterial({
       color: 0x8B5CF6,
-      metalness: 0.8,
-      roughness: 0.2,
-      transparent: true,
-      opacity: 0.8,
-    });
-
-    const material2 = new THREE.MeshPhysicalMaterial({
-      color: 0x06B6D4,
-      metalness: 0.9,
-      roughness: 0.1,
       transparent: true,
       opacity: 0.7,
     });
 
-    const material3 = new THREE.MeshPhysicalMaterial({
-      color: 0x10B981,
-      metalness: 0.7,
-      roughness: 0.3,
+    const material2 = new THREE.MeshLambertMaterial({
+      color: 0x06B6D4,
       transparent: true,
       opacity: 0.6,
     });
 
     const mesh1 = new THREE.Mesh(geometry1, material1);
     const mesh2 = new THREE.Mesh(geometry2, material2);
-    const mesh3 = new THREE.Mesh(geometry3, material3);
 
-    // Position meshes
+    // Position meshes (reduced to 2 objects)
     mesh1.position.set(-2, 1, 0);
     mesh2.position.set(2, -1, 0);
-    mesh3.position.set(0, 2, -1);
 
-    scene.add(mesh1, mesh2, mesh3);
+    scene.add(mesh1, mesh2);
 
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
-    const pointLight1 = new THREE.PointLight(0x8B5CF6, 1, 100);
-    const pointLight2 = new THREE.PointLight(0x06B6D4, 1, 100);
-    
-    pointLight1.position.set(10, 10, 10);
-    pointLight2.position.set(-10, -10, 10);
-    
-    scene.add(ambientLight, pointLight1, pointLight2);
+    // Simplified lighting - just ambient light
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    scene.add(ambientLight);
 
     camera.position.z = 5;
 
@@ -75,23 +59,21 @@ export default function Scene3D() {
     sceneRef.current = scene;
     rendererRef.current = renderer;
 
-    // Animation loop
+    // Optimized animation loop with reduced calculations
     const animate = () => {
       animationIdRef.current = requestAnimationFrame(animate);
 
-      mesh1.rotation.x += 0.01;
-      mesh1.rotation.y += 0.01;
+      // Simpler rotation animations
+      mesh1.rotation.x += 0.005;
+      mesh1.rotation.y += 0.005;
       
-      mesh2.rotation.x -= 0.008;
-      mesh2.rotation.z += 0.012;
-      
-      mesh3.rotation.y += 0.015;
-      mesh3.rotation.z -= 0.005;
+      mesh2.rotation.x -= 0.004;
+      mesh2.rotation.z += 0.006;
 
-      // Floating animation
-      mesh1.position.y = 1 + Math.sin(Date.now() * 0.001) * 0.5;
-      mesh2.position.y = -1 + Math.cos(Date.now() * 0.0012) * 0.4;
-      mesh3.position.x = Math.sin(Date.now() * 0.0008) * 0.6;
+      // Simpler floating animation with less calculations
+      const time = Date.now() * 0.001;
+      mesh1.position.y = 1 + Math.sin(time) * 0.3;
+      mesh2.position.y = -1 + Math.cos(time * 0.8) * 0.3;
 
       renderer.render(scene, camera);
     };

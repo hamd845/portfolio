@@ -9,8 +9,8 @@ export default function Experience() {
     offset: ["start end", "end start"]
   });
 
-  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
-  const y = useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "30%"]), springConfig);
+  // Simplified parallax for better performance
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
 
   const experiences = [
     {

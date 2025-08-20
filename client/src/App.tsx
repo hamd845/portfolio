@@ -19,10 +19,10 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading time for assets and 3D elements
+    // Quick loading - no artificial delay
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 100);
 
     return () => clearTimeout(timer);
   }, []);

@@ -9,9 +9,8 @@ export default function Skills() {
     offset: ["start end", "end start"]
   });
 
-  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
-  const y = useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "50%"]), springConfig);
-  const backgroundY = useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "80%"]), springConfig);
+  // Simplified parallax for better performance
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
   const skillCategories = [
     {
@@ -48,15 +47,12 @@ export default function Skills() {
 
   return (
     <section ref={ref} id="skills" className="py-32 px-4 relative overflow-hidden">
-      {/* Parallax Background */}
-      <motion.div 
-        style={{ y: backgroundY }}
-        className="absolute inset-0 opacity-10"
-      >
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/20 via-secondary/10 to-accent/20" />
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-primary to-secondary rounded-full blur-3xl opacity-30" />
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-br from-accent to-success rounded-full blur-3xl opacity-30" />
-      </motion.div>
+      {/* Simplified Background */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10" />
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-primary to-secondary rounded-full blur-2xl opacity-20" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-accent to-success rounded-full blur-2xl opacity-20" />
+      </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div 

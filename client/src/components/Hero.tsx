@@ -12,32 +12,24 @@ export default function Hero() {
     offset: ["start end", "end start"]
   });
   
-  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
-  const y = useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "80%"]), springConfig);
-  const backgroundY = useSpring(useTransform(scrollYProgress, [0, 1], ["0%", "120%"]), springConfig);
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.8, 1], [1, 0.9, 0.5, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
+  // Simplified animations for better performance
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0.3]);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
   return (
     <section ref={ref} id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <Scene3D />
       
-      {/* Enhanced Parallax Background Layers */}
-      <motion.div 
-        style={{ y: backgroundY }} 
-        className="absolute inset-0 mesh-gradient opacity-40"
-      />
-      <motion.div 
-        style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "60%"]) }} 
-        className="absolute inset-0 opacity-20"
-      >
-        <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-primary/30 to-secondary/30 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-r from-accent/20 to-success/20 rounded-full blur-3xl" />
-      </motion.div>
+      {/* Simplified Background */}
+      <div className="absolute inset-0 mesh-gradient opacity-30" />
+      <div className="absolute inset-0 opacity-15">
+        <div className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full blur-2xl" />
+        <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-r from-accent/15 to-success/15 rounded-full blur-2xl" />
+      </div>
       
       {/* Hero Content */}
       <motion.div 
-        style={{ opacity, scale, y }}
+        style={{ opacity, y }}
         className="relative z-10 text-center px-4 max-w-6xl mx-auto"
       >
         <motion.h1 
