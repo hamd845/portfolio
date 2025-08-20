@@ -4,12 +4,36 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
 import ProjectModal from "./ProjectModal";
 
+// Fallback image component
+const ProjectImage = ({ src, alt, className }: { src: string; alt: string; className: string }) => {
+  const [imageError, setImageError] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const fallbackImage = "https://via.placeholder.com/800x400/2563eb/ffffff?text=Project+Preview";
+
+  return (
+    <div className="relative">
+      {!imageLoaded && (
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 animate-pulse rounded" />
+      )}
+      <img 
+        src={imageError ? fallbackImage : src}
+        alt={alt}
+        className={className}
+        onError={() => setImageError(true)}
+        onLoad={() => setImageLoaded(true)}
+        loading="lazy"
+      />
+    </div>
+  );
+};
+
 const projects = [
   {
     id: 'quiz-app',
     title: 'Interactive Quiz Application',
     description: 'Educational quiz platform with multiple categories, timed questions, score tracking, and leaderboards for competitive learning.',
-    image: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
+    image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&h=400&fit=crop&crop=center',
     technologies: ['React', 'TypeScript', 'Firebase'],
     features: [
       'Multiple quiz categories',
@@ -26,7 +50,7 @@ const projects = [
     id: 'weather-app',
     title: 'Weather Forecast App',
     description: 'Real-time weather application with 7-day forecasts, location-based weather, and interactive weather maps.',
-    image: 'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
+    image: 'https://images.unsplash.com/photo-1561553590-267fc716698a?w=800&h=400&fit=crop&crop=center',
     technologies: ['React', 'Weather API', 'Geolocation'],
     features: [
       '7-day weather forecast',
@@ -43,7 +67,7 @@ const projects = [
     id: 'tic-tac-toe',
     title: 'Advanced Tic Tac Toe Game',
     description: 'Classic tic-tac-toe game with AI opponent, multiplayer mode, game statistics, and customizable themes.',
-    image: 'https://images.unsplash.com/photo-1611996575749-79a3a250f79e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
+    image: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=800&h=400&fit=crop&crop=center',
     technologies: ['React', 'JavaScript', 'CSS3'],
     features: [
       'AI opponent with difficulty levels',
@@ -60,7 +84,7 @@ const projects = [
     id: 'drawing-app',
     title: 'Digital Drawing Canvas',
     description: 'Feature-rich drawing application with multiple brush tools, layers, color palettes, and save/export functionality.',
-    image: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
+    image: 'https://images.unsplash.com/photo-1502675135487-e971002a6adb?w=800&h=400&fit=crop&crop=center',
     technologies: ['Canvas API', 'JavaScript', 'HTML5'],
     features: [
       'Multiple brush tools & sizes',
@@ -77,7 +101,7 @@ const projects = [
     id: 'movie-app',
     title: 'Movie Database Explorer',
     description: 'Comprehensive movie database with search, ratings, reviews, watchlists, and detailed movie information.',
-    image: 'https://images.unsplash.com/photo-1489599459-42b8b6d1b00a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
+    image: 'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=800&h=400&fit=crop&crop=center',
     technologies: ['React', 'TMDB API', 'Redux'],
     features: [
       'Movie search & filtering',
@@ -94,7 +118,7 @@ const projects = [
     id: 'twitter-clone',
     title: 'Social Media Platform',
     description: 'Twitter-inspired social platform with real-time posts, likes, retweets, user profiles, and trending topics.',
-    image: 'https://images.unsplash.com/photo-1611605698335-8b1569810432?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
+    image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&h=400&fit=crop&crop=center',
     technologies: ['React', 'Node.js', 'Socket.io'],
     features: [
       'Real-time tweet posting',
@@ -111,7 +135,7 @@ const projects = [
     id: 'ebook-site',
     title: 'Digital E-Book Library',
     description: 'Online e-book platform with reading interface, bookmarks, note-taking, search functionality, and library management.',
-    image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=400&fit=crop&crop=center',
     technologies: ['React', 'PDF.js', 'Node.js'],
     features: [
       'PDF/EPUB reader',
@@ -128,7 +152,7 @@ const projects = [
     id: 'instagram-clone',
     title: 'Photo Sharing Platform',
     description: 'Instagram-inspired photo sharing app with filters, stories, direct messaging, and social interactions.',
-    image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
+    image: 'https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?w=800&h=400&fit=crop&crop=center',
     technologies: ['React', 'Node.js', 'Cloudinary'],
     features: [
       'Photo upload & filters',
@@ -422,7 +446,7 @@ export default function Projects() {
             >
               <div className="glass-morphism rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-200">
                 <div className="relative overflow-hidden">
-                  <img 
+                  <ProjectImage 
                     src={project.image}
                     alt={project.title}
                     className="w-full h-64 object-cover transition-transform duration-200 group-hover:scale-105"
