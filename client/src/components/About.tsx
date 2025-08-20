@@ -43,7 +43,7 @@ export default function About() {
           className="text-center mb-20"
         >
           <h2 className="font-display text-5xl md:text-7xl font-black mb-6">
-            <span className="premium-gradient bg-clip-text text-transparent">About Me</span>
+            <span className="text-white dark:text-gray-900">About Me</span>
           </h2>
           <p className="text-white/80 dark:text-gray-700 text-xl max-w-3xl mx-auto leading-relaxed text-contrast">
             Passionate developer with expertise in modern web technologies and a love for creating innovative solutions.
@@ -72,7 +72,7 @@ export default function About() {
               <motion.div 
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute -top-6 -right-6 w-32 h-32 premium-gradient rounded-full opacity-30 blur-xl"
+                className="absolute -top-6 -right-6 w-32 h-32 bg-primary rounded-full opacity-30 blur-xl"
               />
             </div>
           </motion.div>
@@ -117,11 +117,7 @@ export default function About() {
                         whileInView={{ width: `${skill.percentage}%` }}
                         transition={{ delay: skill.delay + 0.3, duration: 1.5, ease: "easeOut" }}
                         viewport={{ once: true }}
-                        className={`h-3 rounded-full ${
-                          index % 2 === 0 
-                            ? 'premium-gradient' 
-                            : 'bg-gradient-to-r from-accent to-success'
-                        }`}
+                        className="h-3 rounded-full bg-primary"
                       />
                     </div>
                   </motion.div>

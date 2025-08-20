@@ -119,11 +119,7 @@ export default function Contact() {
           className="text-center mb-20"
         >
           <h2 className="font-display text-5xl md:text-7xl font-black mb-6">
-            <span className="text-white dark:text-gray-900 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent font-bold" 
-                  style={{ 
-                    filter: 'drop-shadow(0 2px 4px rgba(139, 69, 199, 0.6))',
-                    WebkitTextStroke: '1px transparent' 
-                  }}>
+            <span className="text-white dark:text-gray-900 font-bold">
               Get In Touch
             </span>
           </h2>
@@ -297,7 +293,7 @@ export default function Contact() {
                   <Button
                     type="submit"
                     disabled={contactMutation.isPending}
-                    className="w-full px-8 py-6 premium-gradient rounded-xl font-semibold text-white text-lg shadow-2xl hover:shadow-primary/40 transition-all duration-500 glass-morphism backdrop-blur-xl"
+                    className="w-full px-8 py-6 bg-primary hover:bg-primary/90 rounded-xl font-semibold text-white text-lg shadow-lg transition-all duration-300 mx-auto block"
                     data-testid="button-send-message"
                   >
                     <motion.span 

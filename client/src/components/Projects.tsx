@@ -119,7 +119,7 @@ export default function Projects() {
           className="text-center mb-20"
         >
           <h2 className="font-display text-5xl md:text-7xl font-black mb-6">
-            <span className="premium-gradient bg-clip-text text-transparent">Featured Projects</span>
+            <span className="text-white dark:text-gray-900">Featured Projects</span>
           </h2>
           <p className="text-white/80 dark:text-gray-700 text-xl max-w-3xl mx-auto leading-relaxed text-contrast">
             Showcasing my latest work in web development, featuring modern technologies and innovative solutions.

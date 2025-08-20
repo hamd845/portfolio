@@ -50,11 +50,7 @@ export default function Hero() {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.6, duration: 1, ease: "easeOut" }}
-            className="text-white dark:text-gray-900 font-serif bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent filter drop-shadow-lg"
-            style={{ 
-              textShadow: '0 0 30px rgba(139, 69, 199, 0.8)',
-              WebkitTextStroke: '1px transparent'
-            }}
+            className="text-white dark:text-gray-900 font-serif"
           >
             Hamd
           </motion.span>
@@ -74,13 +70,13 @@ export default function Hero() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.3, duration: 0.8 }}
-          className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+          className="flex flex-col sm:flex-row gap-6 justify-center items-center w-full"
         >
           <motion.button 
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => scrollToSection('projects')}
-            className="px-10 py-5 premium-gradient rounded-2xl font-semibold text-white shadow-2xl hover:shadow-primary/40 transition-all duration-500 glass-morphism backdrop-blur-xl"
+            className="px-10 py-5 bg-primary hover:bg-primary/90 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300"
             data-testid="button-view-work"
           >
             <span className="flex items-center space-x-2">

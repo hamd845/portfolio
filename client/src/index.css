@@ -116,9 +116,7 @@
     font-family: var(--font-serif);
   }
   
-  .text-gradient {
-    @apply bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent;
-  }
+  /* Removed text-gradient for better readability */
 
   .animate-float {
     animation: float 6s ease-in-out infinite;
@@ -133,20 +131,7 @@
   }
 
   /* Enhanced animations for better performance */
-  .enhanced-gradient {
-    background: linear-gradient(135deg, 
-      hsl(var(--primary)) 0%, 
-      hsl(var(--secondary)) 25%, 
-      hsl(var(--accent)) 50%, 
-      hsl(var(--success)) 75%, 
-      hsl(var(--primary)) 100%);
-    background-size: 400% 400%;
-    animation: gradient-shift 8s ease infinite;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 8px rgba(139, 69, 199, 0.4));
-  }
+  /* Removed enhanced-gradient for better performance and readability */
 
   .animate-glow {
     animation: glow 2s ease-in-out infinite alternate;
@@ -217,30 +202,7 @@
     color: rgba(0, 0, 0, 0.85);
   }
 
-  .premium-gradient {
-    background: linear-gradient(135deg, 
-      hsl(var(--primary)) 0%, 
-      hsl(var(--secondary)) 25%, 
-      hsl(var(--accent)) 50%, 
-      hsl(var(--success)) 75%, 
-      hsl(var(--primary)) 100%);
-    background-size: 400% 400%;
-    animation: gradient-shift 8s ease infinite;
-  }
-
-  .premium-gradient.bg-clip-text {
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    /* Fallback color for better visibility */
-    color: hsl(var(--primary));
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-  }
-
-  /* Ensure text is visible in different themes */
-  .dark .premium-gradient.bg-clip-text {
-    color: hsl(var(--secondary));
-  }
+  /* Removed premium-gradient classes for better readability and performance */
 
   .text-visible {
     color: hsl(var(--foreground));
