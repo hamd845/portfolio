@@ -1,16 +1,31 @@
 import { Github } from "lucide-react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import Scene3D from "./three/Scene3D";
 
-// Simple image component for projects
-const ProjectImage = ({ src, alt, className }: { src: string; alt: string; className: string }) => (
-  <img 
-    src={src}
-    alt={alt}
-    className={className}
-    loading="lazy"
-  />
-);
+// Lazy loading image component with fallback
+const ProjectImage = ({ src, alt, className }: { src: string; alt: string; className: string }) => {
+  const [imageError, setImageError] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const fallbackImage = "https://via.placeholder.com/800x400/2563eb/ffffff?text=Project+Preview";
+
+  return (
+    <div className="relative">
+      {!imageLoaded && (
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 animate-pulse rounded" />
+      )}
+      <img 
+        src={imageError ? fallbackImage : src}
+        alt={alt}
+        className={className}
+        onError={() => setImageError(true)}
+        onLoad={() => setImageLoaded(true)}
+        loading="lazy"
+      />
+    </div>
+  );
+};
 
 const projects = [
   {
@@ -402,6 +417,17 @@ export default function Projects() {
           <p className="text-white/80 dark:text-gray-700 text-xl max-w-3xl mx-auto leading-relaxed text-contrast">
             Showcasing my latest work in web development, featuring modern technologies and innovative solutions.
           </p>
+          
+          {/* 3D Scene Preview */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            viewport={{ once: true }}
+            className="mt-12 max-w-2xl mx-auto"
+          >
+            <Scene3D visible={true} />
+          </motion.div>
         </motion.div>
         
         <div className="grid md:grid-cols-2 gap-8">
