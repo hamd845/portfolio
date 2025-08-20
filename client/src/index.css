@@ -105,7 +105,7 @@
 
   body {
     overflow-x: hidden;
-    overflow-y: hidden;
+    overflow-y: auto;
   }
 
   /* Enhanced Scroll Hijacking Styles */

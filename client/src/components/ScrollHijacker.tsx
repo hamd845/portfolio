@@ -240,7 +240,7 @@ export default function ScrollHijacker({ children }: ScrollHijackerProps) {
       {/* Main Content Container */}
       <div 
         ref={containerRef}
-        className="relative z-10 h-screen overflow-y-auto scroll-smooth"
+        className="relative z-10 min-h-screen overflow-y-auto scroll-smooth"
         style={{ 
           scrollBehavior: 'smooth',
           scrollSnapType: 'y mandatory'
