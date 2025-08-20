@@ -2,19 +2,13 @@ import { useState, useEffect } from "react";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
+import { useTheme } from "@/contexts/ThemeProvider";
 
 export default function Navigation() {
-  const [isDark, setIsDark] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { scrollToSection } = useSmoothScroll();
-
-  useEffect(() => {
-    // Check for saved theme or default to dark
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    setIsDark(savedTheme === 'dark');
-    document.documentElement.classList.toggle('dark', savedTheme !== 'dark');
-  }, []);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,13 +17,6 @@ export default function Navigation() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const toggleTheme = () => {
-    const newTheme = isDark ? 'light' : 'dark';
-    setIsDark(!isDark);
-    localStorage.setItem('theme', newTheme);
-    document.documentElement.classList.toggle('dark', newTheme !== 'dark');
-  };
 
   const handleNavClick = (sectionId: string) => {
     scrollToSection(sectionId);
@@ -93,7 +80,7 @@ export default function Navigation() {
               data-testid="theme-toggle"
             >
               <AnimatePresence mode="wait">
-                {isDark ? (
+                {theme === 'dark' ? (
                   <motion.div
                     key="sun"
                     initial={{ rotate: -90, opacity: 0 }}
@@ -101,7 +88,7 @@ export default function Navigation() {
                     exit={{ rotate: 90, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <Sun className="w-5 h-5" />
+                    <Sun className="w-5 h-5 text-yellow-500" />
                   </motion.div>
                 ) : (
                   <motion.div
@@ -111,7 +98,7 @@ export default function Navigation() {
                     exit={{ rotate: -90, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <Moon className="w-5 h-5" />
+                    <Moon className="w-5 h-5 text-slate-700" />
                   </motion.div>
                 )}
               </AnimatePresence>
