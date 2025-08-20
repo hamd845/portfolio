@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSmoothScroll } from "@/hooks/use-smooth-scroll";
-import AuthButton from "./auth/AuthButton";
 
 export default function Navigation() {
   const [isDark, setIsDark] = useState(false);
@@ -85,10 +84,6 @@ export default function Navigation() {
           </div>
           
           <div className="flex items-center space-x-4">
-            <div className="hidden md:block">
-              <AuthButton />
-            </div>
-            
             <motion.button 
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
