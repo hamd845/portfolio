@@ -128,19 +128,17 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
               viewport={{ once: true }}
-              whileHover={{ y: -10 }}
+              whileHover={{ y: -3 }}
               className="group cursor-pointer"
               onClick={() => openProject(project)}
               data-testid={`card-${project.id}`}
             >
-              <div className="glass-morphism rounded-3xl overflow-hidden shadow-2xl hover:shadow-primary/20 transition-all duration-500 backdrop-blur-xl">
+              <div className="glass-morphism rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-200">
                 <div className="relative overflow-hidden">
-                  <motion.img 
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.4 }}
+                  <img 
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-64 object-cover"
+                    className="w-full h-64 object-cover transition-transform duration-200 group-hover:scale-105"
                   />
                   
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -151,23 +149,21 @@ export default function Projects() {
                     className="absolute bottom-4 left-4 right-4"
                   >
                     <div className="flex space-x-3">
-                      <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="p-3 glass-morphism rounded-full text-white hover:text-primary transition-colors"
+                      <button
+                        className="p-3 bg-white/10 rounded-full text-white hover:text-primary hover:bg-white/20 transition-all duration-150"
                         onClick={(e) => {
                           e.stopPropagation();
                           window.open(project.github, '_blank');
                         }}
                       >
                         <Github className="w-5 h-5" />
-                      </motion.button>
+                      </button>
                     </div>
                   </motion.div>
                 </div>
                 
                 <div className="p-8">
-                  <h3 className="font-display text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">
+                  <h3 className="font-display text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-150">
                     {project.title}
                   </h3>
                   <p className="text-white/70 dark:text-gray-600 mb-6 leading-relaxed text-contrast">
@@ -175,27 +171,18 @@ export default function Projects() {
                   </p>
                   <div className="flex flex-wrap gap-2 mb-6">
                     {project.technologies.map((tech) => (
-                      <motion.span 
+                      <span 
                         key={tech}
-                        whileHover={{ scale: 1.05 }}
-                        className="px-4 py-2 glass-morphism text-primary rounded-full text-sm font-medium"
+                        className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium hover:bg-primary/20 transition-colors duration-150"
                       >
                         {tech}
-                      </motion.span>
+                      </span>
                     ))}
                   </div>
-                  <motion.button 
-                    whileHover={{ x: 5 }}
-                    className="text-primary hover:text-secondary transition-colors duration-300 font-semibold flex items-center space-x-2"
-                  >
+                  <div className="text-primary hover:text-secondary transition-colors duration-150 font-semibold flex items-center space-x-2">
                     <span>View Details</span>
-                    <motion.span
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
-                      →
-                    </motion.span>
-                  </motion.button>
+                    <span className="group-hover:translate-x-1 transition-transform duration-150">→</span>
+                  </div>
                 </div>
               </div>
             </motion.div>

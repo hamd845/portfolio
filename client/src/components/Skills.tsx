@@ -80,15 +80,12 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.02, y: -5 }}
+              whileHover={{ y: -2 }}
               className="glass-morphism rounded-3xl p-8 backdrop-blur-xl border border-white/10 group"
             >
-              <motion.div 
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                className={`w-16 h-16 bg-gradient-to-br ${category.color} rounded-2xl flex items-center justify-center mb-6 shadow-lg`}
-              >
+              <div className={`w-16 h-16 bg-gradient-to-br ${category.color} rounded-2xl flex items-center justify-center mb-6 shadow-lg hover:shadow-xl transition-shadow duration-150`}>
                 <category.icon className="w-8 h-8 text-white" />
-              </motion.div>
+              </div>
               
               <h3 className="font-display text-2xl font-bold mb-4 text-white dark:text-gray-900">
                 {category.title}

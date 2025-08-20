@@ -54,12 +54,10 @@ export default function About() {
             className="relative"
           >
             <div className="relative group">
-              <motion.img 
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
+              <img 
                 src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=800" 
                 alt="Professional developer profile" 
-                className="rounded-3xl shadow-2xl w-full max-w-lg mx-auto glass-morphism p-1"
+                className="rounded-3xl shadow-xl w-full max-w-lg mx-auto bg-white/5 p-1 hover:shadow-2xl transition-shadow duration-200"
                 data-testid="img-profile"
               />
               

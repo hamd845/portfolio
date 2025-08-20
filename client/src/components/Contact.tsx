@@ -145,12 +145,9 @@ export default function Contact() {
                     className="flex items-center space-x-6 group"
                     data-testid={`contact-${info.label.toLowerCase()}`}
                   >
-                    <motion.div 
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      className={`w-16 h-16 glass-morphism rounded-2xl flex items-center justify-center group-hover:bg-${info.color}/20 transition-all duration-300`}
-                    >
+                    <div className={`w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-${info.color}/10 transition-colors duration-150`}>
                       <info.icon className={`w-6 h-6 text-${info.color}`} />
-                    </motion.div>
+                    </div>
                     <div>
                       <p className="font-semibold text-lg text-white dark:text-gray-900">{info.label}</p>
                       <p className="text-white/70 dark:text-gray-600 text-lg">{info.value}</p>
@@ -172,9 +169,7 @@ export default function Contact() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ delay: index * 0.1, duration: 0.6 }}
                     viewport={{ once: true }}
-                    whileHover={{ scale: 1.2, rotate: 5 }}
-                    whileTap={{ scale: 0.9 }}
-                    className={`w-16 h-16 bg-gradient-to-br ${social.color} rounded-2xl flex items-center justify-center text-white shadow-lg hover:shadow-xl transition-all duration-300`}
+                    className={`w-16 h-16 bg-gradient-to-br ${social.color} rounded-2xl flex items-center justify-center text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-150`}
                     data-testid={`social-${index}`}
                   >
                     <social.icon className="w-6 h-6" />
@@ -281,10 +276,7 @@ export default function Contact() {
                   )}
                 />
                 
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
+                <div>
                   <Button
                     type="submit"
                     disabled={contactMutation.isPending}
@@ -300,7 +292,7 @@ export default function Contact() {
                       <Send className="w-5 h-5" />
                     </motion.span>
                   </Button>
-                </motion.div>
+                </div>
               </form>
             </Form>
           </motion.div>
