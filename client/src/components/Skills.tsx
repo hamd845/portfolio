@@ -62,8 +62,8 @@ export default function Skills() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="font-display text-5xl md:text-7xl font-black mb-6">
-            <span className="text-white dark:text-gray-900">
+          <h2 className="font-heading text-5xl md:text-7xl font-black mb-6">
+            <span className="text-gradient-primary">
               Skills & Expertise
             </span>
           </h2>
@@ -87,7 +87,7 @@ export default function Skills() {
                 <category.icon className="w-8 h-8 text-white" />
               </div>
               
-              <h3 className="font-display text-2xl font-bold mb-4 text-white dark:text-gray-900">
+              <h3 className="font-display text-2xl font-bold mb-4 text-gradient-cool">
                 {category.title}
               </h3>
               

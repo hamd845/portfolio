@@ -36,8 +36,8 @@ export default function About() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="font-display text-5xl md:text-7xl font-black mb-6">
-            <span className="text-white dark:text-gray-900">About Me</span>
+          <h2 className="font-heading text-5xl md:text-7xl font-black mb-6">
+            <span className="text-gradient-cool">About Me</span>
           </h2>
           <p className="text-white/80 dark:text-gray-700 text-xl max-w-3xl mx-auto leading-relaxed text-contrast">
             Passionate developer with expertise in modern web technologies and a love for creating innovative solutions.
@@ -78,7 +78,7 @@ export default function About() {
             className="space-y-10"
           >
             <div>
-              <h3 className="font-display text-3xl font-bold mb-6 text-primary">My Journey</h3>
+              <h3 className="font-display text-3xl font-bold mb-6 text-gradient-nature">My Journey</h3>
               <p className="text-white/80 dark:text-gray-700 leading-relaxed text-lg mb-8 text-contrast">
                 With over 5 years of experience in web development, I specialize in creating 
                 scalable applications using React, Next.js, and Node.js. My passion lies in 
@@ -88,7 +88,7 @@ export default function About() {
             
             {/* Enhanced Skills Progress */}
             <div>
-              <h3 className="font-display text-3xl font-bold mb-8 text-primary">Technical Skills</h3>
+              <h3 className="font-display text-3xl font-bold mb-8 text-gradient-primary">Technical Skills</h3>
               <div className="space-y-6">
                 {skills.map((skill, index) => (
                   <motion.div 

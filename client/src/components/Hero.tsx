@@ -16,17 +16,17 @@ export default function Hero() {
       
       {/* Hero Content */}
       <div className="relative z-20 text-center px-4 max-w-6xl mx-auto">
-        <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-black mb-8 leading-tight">
-          <span className="block text-white dark:text-gray-900 mb-4 text-contrast font-medium">
+        <h1 className="font-heading text-6xl md:text-8xl lg:text-9xl font-black mb-8 leading-tight">
+          <span className="block text-gradient-cool mb-4 font-medium">
             Hi, I'm
           </span>
-          <span className="text-white dark:text-gray-900 font-serif">
+          <span className="text-gradient-hero font-serif">
             Hamd
           </span>
         </h1>
         
         <p className="text-xl md:text-3xl text-white/90 dark:text-gray-800 mb-12 max-w-4xl mx-auto font-light leading-relaxed text-contrast">
-          Full Stack Developer crafting <span className="text-primary font-semibold bg-white/10 dark:bg-black/10 px-2 py-1 rounded">premium digital experiences</span> with 
+          Full Stack Developer crafting <span className="text-gradient-warm font-semibold bg-white/10 dark:bg-black/10 px-2 py-1 rounded">premium digital experiences</span> with 
           cutting-edge technology and innovative solutions.
         </p>
         

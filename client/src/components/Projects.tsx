@@ -112,8 +112,8 @@ export default function Projects() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="font-display text-5xl md:text-7xl font-black mb-6">
-            <span className="text-white dark:text-gray-900">Featured Projects</span>
+          <h2 className="font-heading text-5xl md:text-7xl font-black mb-6">
+            <span className="text-gradient-hero">Featured Projects</span>
           </h2>
           <p className="text-white/80 dark:text-gray-700 text-xl max-w-3xl mx-auto leading-relaxed text-contrast">
             Showcasing my latest work in web development, featuring modern technologies and innovative solutions.
@@ -163,7 +163,7 @@ export default function Projects() {
                 </div>
                 
                 <div className="p-8">
-                  <h3 className="font-display text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-150">
+                  <h3 className="font-display text-2xl font-bold mb-4 text-gradient-warm">
                     {project.title}
                   </h3>
                   <p className="text-white/70 dark:text-gray-600 mb-6 leading-relaxed text-contrast">
