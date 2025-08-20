@@ -4,14 +4,11 @@ import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import Navigation from "@/components/Navigation";
-import ScrollHijacker from "@/components/ScrollHijacker";
-import { useScrollProgress } from "@/hooks/use-scroll-progress";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import FloatingElements from "@/components/FloatingElements";
 
 export default function Home() {
-  const scrollProgress = useScrollProgress();
 
   useEffect(() => {
     // Set proper meta tags for SEO
@@ -37,8 +34,8 @@ export default function Home() {
       <Navigation />
       <FloatingElements />
       
-      {/* Scroll Hijacked Sections */}
-      <ScrollHijacker>
+      {/* Main Content Sections */}
+      <main>
         <Hero />
         <About />
         <Skills />
@@ -46,7 +43,7 @@ export default function Home() {
         <Contact />
         
         {/* Footer */}
-        <footer className="py-12 px-4 border-t border-gray-700/20 dark:border-gray-200/20 min-h-screen flex items-center justify-center">
+        <footer className="py-12 px-4 border-t border-gray-700/20 dark:border-gray-200/20">
           <div className="max-w-7xl mx-auto text-center">
             <div className="font-display text-2xl font-bold mb-4">
               <span className="text-gradient-hero">Hamd</span>
@@ -59,7 +56,7 @@ export default function Home() {
             </p>
           </div>
         </footer>
-      </ScrollHijacker>
+      </main>
     </motion.div>
   );
 }

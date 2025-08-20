@@ -100,34 +100,12 @@
 
   html {
     overflow-x: hidden;
-    scroll-behavior: auto;
+    scroll-behavior: smooth;
   }
 
   body {
     overflow-x: hidden;
     overflow-y: auto;
-  }
-
-  /* Enhanced Scroll Hijacking Styles */
-  .scroll-hijacked-container {
-    height: 100vh;
-    overflow-y: auto;
-    scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
-  }
-
-  .scroll-hijacked-container section {
-    min-height: 100vh;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    position: relative;
-  }
-
-  /* Advanced performance optimizations */
-  .scroll-hijacked-container * {
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    perspective: 1000px;
   }
 
   /* Smooth scroll effects */
