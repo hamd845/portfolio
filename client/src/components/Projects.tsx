@@ -384,7 +384,7 @@ export default function Projects() {
   };
 
   return (
-    <section ref={ref} id="projects" className="py-32 px-4 relative overflow-hidden bg-dark-card/10 dark:bg-gray-50/5">
+    <section ref={ref} id="projects" className="py-32 px-4 relative overflow-hidden bg-dark-card/10 dark:bg-gray-50/5 min-h-screen scroll-optimized">
       {/* Simple Background */}
       <div className="absolute inset-0 opacity-3">
         <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-gradient-to-br from-primary to-secondary rounded-full blur-2xl" />

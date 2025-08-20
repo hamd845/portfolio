@@ -98,7 +98,7 @@ export default function Contact() {
   ];
 
   return (
-    <section ref={ref} id="contact" className="py-32 px-4 relative overflow-hidden">
+    <section ref={ref} id="contact" className="py-32 px-4 relative overflow-hidden min-h-screen scroll-optimized">
       {/* Simple Background */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-primary to-secondary rounded-full blur-2xl" />

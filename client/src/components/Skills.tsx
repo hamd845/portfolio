@@ -46,7 +46,7 @@ export default function Skills() {
   ];
 
   return (
-    <section ref={ref} id="skills" className="py-32 px-4 relative overflow-hidden">
+    <section ref={ref} id="skills" className="py-32 px-4 relative overflow-hidden min-h-screen scroll-optimized">
       {/* Simplified Background */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10" />

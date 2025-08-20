@@ -21,7 +21,7 @@ export default function About() {
   // Removed heavy animations for better performance
 
   return (
-    <section id="about" className="py-32 px-4 relative overflow-hidden" ref={ref}>
+    <section id="about" className="py-32 px-4 relative overflow-hidden min-h-screen scroll-optimized" ref={ref}>
       {/* Simple Background */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 left-0 w-80 h-80 bg-gradient-to-br from-primary to-secondary rounded-full blur-2xl" />

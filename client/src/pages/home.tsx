@@ -4,10 +4,10 @@ import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import Navigation from "@/components/Navigation";
+import ScrollHijacker from "@/components/ScrollHijacker";
 import { useScrollProgress } from "@/hooks/use-scroll-progress";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import ScrollProgress from "@/components/ScrollProgress";
 import FloatingElements from "@/components/FloatingElements";
 
 export default function Home() {
@@ -34,34 +34,32 @@ export default function Home() {
       transition={{ duration: 0.5 }}
       className="min-h-screen bg-dark-bg dark:bg-background text-light-text dark:text-foreground overflow-x-hidden scroll-smooth"
     >
-      {/* Enhanced Scroll Progress Indicator */}
-      <ScrollProgress />
-      
       <Navigation />
       <FloatingElements />
       
-      <main className="relative">
+      {/* Scroll Hijacked Sections */}
+      <ScrollHijacker>
         <Hero />
         <About />
         <Skills />
         <Projects />
         <Contact />
-      </main>
-      
-      {/* Footer */}
-      <footer className="py-12 px-4 border-t border-gray-700/20 dark:border-gray-200/20">
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="font-display text-2xl font-bold mb-4">
-            <span className="text-gradient">Hamd</span>
+        
+        {/* Footer */}
+        <footer className="py-12 px-4 border-t border-gray-700/20 dark:border-gray-200/20 min-h-screen flex items-center justify-center">
+          <div className="max-w-7xl mx-auto text-center">
+            <div className="font-display text-2xl font-bold mb-4">
+              <span className="text-gradient-hero">Hamd</span>
+            </div>
+            <p className="text-gray-400 dark:text-gray-600 mb-6">
+              Building the future, one line of code at a time.
+            </p>
+            <p className="text-sm text-gray-500">
+              © 2024 Portfolio. All rights reserved. Designed & Developed with ❤️
+            </p>
           </div>
-          <p className="text-gray-400 dark:text-gray-600 mb-6">
-            Building the future, one line of code at a time.
-          </p>
-          <p className="text-sm text-gray-500">
-            © 2024 Portfolio. All rights reserved. Designed & Developed with ❤️
-          </p>
-        </div>
-      </footer>
+        </footer>
+      </ScrollHijacker>
     </motion.div>
   );
 }

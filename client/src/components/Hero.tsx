@@ -5,7 +5,7 @@ export default function Hero() {
   const { scrollToSection } = useSmoothScroll();
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden scroll-optimized">
       
       {/* Simplified Background */}
       <div className="absolute inset-0 mesh-gradient opacity-30" />
