@@ -48,7 +48,7 @@ export default function Navigation() {
             whileHover={{ scale: 1.05 }}
             className="text-2xl font-display font-black"
           >
-            <span className="text-white dark:text-gray-900 font-bold text-shadow-lg">
+            <span className="text-primary-contrast font-bold text-shadow-lg">
               Hamd
             </span>
           </motion.div>
@@ -62,7 +62,7 @@ export default function Navigation() {
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -2 }}
                 onClick={() => handleNavClick(item.id)}
-                className="relative font-medium transition-colors duration-300 hover:text-primary group"
+                className="relative font-medium transition-colors duration-300 hover:text-primary group text-nav-contrast"
                 data-testid={`nav-${item.label.toLowerCase()}`}
               >
                 {item.label}
@@ -152,7 +152,7 @@ export default function Navigation() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
                   onClick={() => handleNavClick(item.id)}
-                  className="block w-full text-left px-6 py-3 hover:text-primary transition-colors duration-300 font-medium"
+                  className="block w-full text-left px-6 py-3 hover:text-primary transition-colors duration-300 font-medium text-nav-contrast"
                   data-testid={`mobile-nav-${item.label.toLowerCase()}`}
                 >
                   {item.label}

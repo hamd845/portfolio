@@ -112,7 +112,7 @@ export default function Projects() {
           <h2 className="font-heading text-5xl md:text-7xl font-black mb-6">
             <span className="text-gradient-hero">Featured Projects</span>
           </h2>
-          <p className="text-white/80 dark:text-gray-700 text-xl max-w-3xl mx-auto leading-relaxed text-contrast">
+          <p className="text-secondary-contrast text-xl max-w-3xl mx-auto leading-relaxed">
             Showcasing my latest work in web development, featuring modern technologies and innovative solutions.
           </p>
           
@@ -189,7 +189,7 @@ export default function Projects() {
                   <h3 className="font-display text-2xl font-bold mb-4 text-gradient-warm">
                     {project.title}
                   </h3>
-                  <p className="text-white/70 dark:text-gray-600 mb-6 leading-relaxed text-contrast">
+                  <p className="text-secondary-contrast mb-6 leading-relaxed">
                     {project.description}
                   </p>
                   <div className="flex flex-wrap gap-2 mb-6">

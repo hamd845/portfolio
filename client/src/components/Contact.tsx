@@ -118,7 +118,7 @@ export default function Contact() {
               Get In Touch
             </span>
           </h2>
-          <p className="text-white/80 dark:text-gray-700 text-xl max-w-3xl mx-auto leading-relaxed text-contrast">
+          <p className="text-secondary-contrast text-xl max-w-3xl mx-auto leading-relaxed">
             Ready to bring your ideas to life? Let's discuss your next project and create something amazing together.
           </p>
         </motion.div>
@@ -133,7 +133,7 @@ export default function Contact() {
             className="space-y-12"
           >
             <div>
-              <h3 className="font-display text-3xl font-bold mb-8 text-primary">Contact Information</h3>
+              <h3 className="font-display text-3xl font-bold mb-8 text-primary-contrast">Contact Information</h3>
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
                   <motion.div 
@@ -149,8 +149,8 @@ export default function Contact() {
                       <info.icon className={`w-6 h-6 text-${info.color}`} />
                     </div>
                     <div>
-                      <p className="font-semibold text-lg text-white dark:text-gray-900">{info.label}</p>
-                      <p className="text-white/70 dark:text-gray-600 text-lg">{info.value}</p>
+                      <p className="font-semibold text-lg text-primary-contrast">{info.label}</p>
+                      <p className="text-secondary-contrast text-lg">{info.value}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -159,7 +159,7 @@ export default function Contact() {
             
             {/* Social Links */}
             <div>
-              <h3 className="font-display text-2xl font-bold mb-6">Follow Me</h3>
+              <h3 className="font-display text-2xl font-bold mb-6 text-primary-contrast">Follow Me</h3>
               <div className="flex space-x-4">
                 {socialLinks.map((social, index) => (
                   <motion.a 

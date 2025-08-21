@@ -550,3 +550,28 @@
   animation: gradient 2s ease-in-out infinite;
 }
 /* Performance optimization styles added */
+
+/* Enhanced text contrast utilities for dark mode */
+.text-primary-contrast {
+  @apply text-white;
+}
+
+.dark .text-primary-contrast {
+  @apply text-gray-900;
+}
+
+.text-secondary-contrast {
+  @apply text-white/80;
+}
+
+.dark .text-secondary-contrast {
+  @apply text-gray-700;
+}
+
+.text-nav-contrast {
+  @apply text-white/90;
+}
+
+.dark .text-nav-contrast {
+  @apply text-gray-800;
+}
