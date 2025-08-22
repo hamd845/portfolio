@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Twitter, Instagram, Facebook } from "lucide-react";
+import { Github, Linkedin, Twitter, Instagram } from "lucide-react";
 
 const socialLinks = [
   {
@@ -29,13 +29,6 @@ const socialLinks = [
     url: "https://instagram.com/hamdelahi",
     color: "hover:text-pink-500",
     bgColor: "hover:bg-pink-50 dark:hover:bg-pink-900/20"
-  },
-  {
-    name: "Facebook",
-    icon: Facebook,
-    url: "https://facebook.com/hamdelahi",
-    color: "hover:text-blue-600",
-    bgColor: "hover:bg-blue-50 dark:hover:bg-blue-900/20"
   }
 ];
 

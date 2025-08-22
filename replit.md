@@ -26,7 +26,7 @@ Portfolio requirements: More features and functionality, enhanced parallax scrol
 - ✅ Applied gradient text styling to "Get In Touch" section title
 - ✅ Added WebGL-optimized Three.js 3D scene with lazy loading and performance detection
 - ✅ Enhanced image lazy loading with fallback handling and progressive loading
-- ✅ Integrated social media section with Instagram, Facebook, GitHub, LinkedIn, and Twitter/X links
+- ✅ Integrated social media section with Instagram, GitHub, LinkedIn, and Twitter/X links
 
 ### Current Portfolio Structure
 The portfolio now contains 6 main sections:
