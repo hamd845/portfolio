@@ -30,6 +30,8 @@ Portfolio requirements: More features and functionality, enhanced parallax scrol
 - ✅ Added Full E-commerce Website project with payment integration
 - ✅ Added 40+ Tools PDF Website project with payment system
 - ✅ Added PHP programming language to portfolio skills and technical sections
+- ✅ Added Restaurant Website project with reservations and payment processing
+- ✅ Added AI Chatbot project with OpenAI integration and natural language processing
 
 ### Current Portfolio Structure
 The portfolio now contains 6 main sections:

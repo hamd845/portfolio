@@ -105,6 +105,22 @@ const projects = [
     image: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=800&h=400&fit=crop&crop=center',
     technologies: ['React', 'Node.js', 'PDF.js', 'Stripe', 'PayPal'],
     github: '#'
+  },
+  {
+    id: 'restaurant-website',
+    title: 'Restaurant Website',
+    description: 'Modern restaurant website with online menu, table reservations, order management, customer reviews, and integrated payment processing for seamless dining experience.',
+    image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=400&fit=crop&crop=center',
+    technologies: ['React', 'Node.js', 'MongoDB', 'Stripe', 'Express'],
+    github: '#'
+  },
+  {
+    id: 'ai-chatbot',
+    title: 'AI Chatbot',
+    description: 'Intelligent conversational AI chatbot with natural language processing, context awareness, multi-language support, and seamless integration capabilities.',
+    image: 'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&h=400&fit=crop&crop=center',
+    technologies: ['React', 'Node.js', 'OpenAI API', 'WebSocket', 'MongoDB'],
+    github: '#'
   }
 ];
 
