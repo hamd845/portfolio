@@ -1,10 +1,7 @@
 import { Phone, Mail, MapPin, Linkedin, Github, Twitter, Send } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { insertContactSchema } from "@shared/schema";
 import { z } from "zod";
-import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -13,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
 
-const contactFormSchema = insertContactSchema.extend({
+const contactFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
   subject: z.string().min(5, "Subject must be at least 5 characters"),
@@ -43,31 +40,20 @@ export default function Contact() {
     },
   });
 
-  const contactMutation = useMutation({
-    mutationFn: async (data: ContactFormData) => {
-      const response = await apiRequest('POST', '/api/contact', data);
-      return response.json();
-    },
-    onSuccess: (data) => {
-      toast({
-        title: "Message sent successfully! 📧",
-        description: data.emailSent 
-          ? "Your message has been sent to aliyaanmohd42@gmail.com. You'll receive a response soon!"
-          : data.message || "Your message has been received and saved. I'll get back to you soon!",
-      });
-      form.reset();
-    },
-    onError: (error: any) => {
-      toast({
-        title: "Error",
-        description: error.message || "Failed to send message. Please try again.",
-        variant: "destructive",
-      });
-    },
-  });
+  const handleFormSubmit = async (data: ContactFormData) => {
+    // Simulate form submission - in a real frontend-only app, you might use a service like Formspree, Netlify Forms, etc.
+    console.log('Contact form submitted:', data);
+    
+    toast({
+      title: "Message received! 📧",
+      description: "Thank you for your message. I'll get back to you soon!",
+    });
+    
+    form.reset();
+  };
 
-  const onSubmit = (data: ContactFormData) => {
-    contactMutation.mutate(data);
+  const onSubmit = async (data: ContactFormData) => {
+    await handleFormSubmit(data);
   };
 
   const contactInfo = [
@@ -279,16 +265,16 @@ export default function Contact() {
                 <div className="flex justify-center pt-4">
                   <Button
                     type="submit"
-                    disabled={contactMutation.isPending}
+                    disabled={form.formState.isSubmitting}
                     className="w-full max-w-md px-8 py-6 bg-primary hover:bg-primary/90 rounded-xl font-semibold text-white text-lg shadow-lg hover:shadow-xl transition-all duration-300"
                     data-testid="button-send-message"
                   >
                     <motion.span 
                       className="flex items-center justify-center space-x-3"
-                      animate={contactMutation.isPending ? { opacity: [1, 0.5, 1] } : {}}
-                      transition={{ duration: 1, repeat: contactMutation.isPending ? Infinity : 0 }}
+                      animate={form.formState.isSubmitting ? { opacity: [1, 0.5, 1] } : {}}
+                      transition={{ duration: 1, repeat: form.formState.isSubmitting ? Infinity : 0 }}
                     >
-                      <span>{contactMutation.isPending ? "Sending..." : "Send Message"}</span>
+                      <span>{form.formState.isSubmitting ? "Sending..." : "Send Message"}</span>
                       <Send className="w-5 h-5" />
                     </motion.span>
                   </Button>
