@@ -2,7 +2,7 @@ import { exec } from "child_process";
 
 console.log("Starting frontend-only portfolio...");
 
-const viteProcess = exec("npx vite --host 0.0.0.0 --port 5000", (error, stdout, stderr) => {
+const viteProcess = exec("VITE_HOST=0.0.0.0 npx vite --host 0.0.0.0 --port 5000", (error, stdout, stderr) => {
   if (error) {
     console.error(`Error: ${error.message}`);
     return;
