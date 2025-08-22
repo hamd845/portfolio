@@ -195,7 +195,7 @@ export default function Contact() {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-lg font-semibold">Name</FormLabel>
+                        <FormLabel className="text-lg font-semibold text-primary-contrast">Name</FormLabel>
                         <FormControl>
                           <motion.div whileFocus={{ scale: 1.02 }}>
                             <Input
@@ -215,7 +215,7 @@ export default function Contact() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-lg font-semibold">Email</FormLabel>
+                        <FormLabel className="text-lg font-semibold text-primary-contrast">Email</FormLabel>
                         <FormControl>
                           <motion.div whileFocus={{ scale: 1.02 }}>
                             <Input
@@ -238,7 +238,7 @@ export default function Contact() {
                   name="subject"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-lg font-semibold">Subject</FormLabel>
+                      <FormLabel className="text-lg font-semibold text-primary-contrast">Subject</FormLabel>
                       <FormControl>
                         <motion.div whileFocus={{ scale: 1.02 }}>
                           <Input
@@ -259,7 +259,7 @@ export default function Contact() {
                   name="message"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-lg font-semibold">Message</FormLabel>
+                      <FormLabel className="text-lg font-semibold text-primary-contrast">Message</FormLabel>
                       <FormControl>
                         <motion.div whileFocus={{ scale: 1.02 }}>
                           <Textarea
