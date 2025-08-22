@@ -92,9 +92,9 @@ export default function Contact() {
   ];
 
   const socialLinks = [
-    { icon: Linkedin, href: "#", color: "from-primary to-secondary" },
-    { icon: Github, href: "#", color: "from-secondary to-accent" },
-    { icon: Twitter, href: "#", color: "from-accent to-success" }
+    { icon: Linkedin, href: "https://www.linkedin.com/in/hamd-codes-113658311/", color: "from-primary to-secondary" },
+    { icon: Github, href: "https://github.com/hamd845", color: "from-secondary to-accent" },
+    { icon: Twitter, href: "https://x.com/CodesHamd23703", color: "from-accent to-success" }
   ];
 
   return (

@@ -5,28 +5,28 @@ const socialLinks = [
   {
     name: "GitHub",
     icon: Github,
-    url: "https://github.com/hamdelahi",
+    url: "https://github.com/hamd845",
     color: "hover:text-gray-800 dark:hover:text-white",
     bgColor: "hover:bg-gray-100 dark:hover:bg-gray-800"
   },
   {
     name: "LinkedIn", 
     icon: Linkedin,
-    url: "https://linkedin.com/in/hamdelahi",
+    url: "https://www.linkedin.com/in/hamd-codes-113658311/",
     color: "hover:text-blue-600",
     bgColor: "hover:bg-blue-50 dark:hover:bg-blue-900/20"
   },
   {
     name: "Twitter",
     icon: Twitter,
-    url: "https://twitter.com/hamdelahi",
+    url: "https://x.com/CodesHamd23703",
     color: "hover:text-blue-400",
     bgColor: "hover:bg-blue-50 dark:hover:bg-blue-900/20"
   },
   {
     name: "Instagram",
     icon: Instagram,
-    url: "https://instagram.com/hamdelahi",
+    url: "https://www.instagram.com/hamd_code/",
     color: "hover:text-pink-500",
     bgColor: "hover:bg-pink-50 dark:hover:bg-pink-900/20"
   }
