@@ -1,7 +1,6 @@
 import { Github } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import Scene3D from "./three/Scene3D";
 
 // Simple image component with cursor movement effect
 const ProjectImage = ({ src, alt, className }: { src: string; alt: string; className: string }) => {
@@ -147,17 +146,6 @@ export default function Projects() {
           <p className="text-secondary-contrast text-xl max-w-3xl mx-auto leading-relaxed">
             Showcasing my latest work in web development, featuring modern technologies and innovative solutions.
           </p>
-          
-          {/* 3D Scene Preview */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            viewport={{ once: true }}
-            className="mt-12 max-w-2xl mx-auto"
-          >
-            <Scene3D visible={true} />
-          </motion.div>
         </motion.div>
         
         <div className="grid md:grid-cols-2 gap-8">
