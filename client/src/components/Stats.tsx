@@ -73,7 +73,7 @@ export default function Stats() {
     },
     {
       icon: Award,
-      value: 5,
+      value: 6,
       suffix: " Years",
       label: "Experience",
       description: "In web development",

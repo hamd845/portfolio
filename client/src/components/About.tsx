@@ -92,7 +92,7 @@ export default function About() {
             <div>
               <h3 className="font-display text-3xl font-bold mb-6 text-gradient-nature">My Journey</h3>
               <p className="text-secondary-contrast leading-relaxed text-lg mb-8">
-                With over 5 years of experience in web development, I specialize in creating 
+                With over 6 years of experience in web development, I specialize in creating 
                 scalable applications using React, Next.js, and Node.js. My passion lies in 
                 building user-centric solutions that combine beautiful design with robust functionality.
               </p>

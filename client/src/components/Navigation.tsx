@@ -48,7 +48,7 @@ export default function Navigation() {
             whileHover={{ scale: 1.05 }}
             className="text-2xl font-display font-black"
           >
-            <span className="text-primary-contrast font-bold text-shadow-lg">
+            <span className="text-gradient-hero font-bold text-shadow-lg">
               Hamd
             </span>
           </motion.div>
