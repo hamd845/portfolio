@@ -89,6 +89,22 @@ const projects = [
     image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&h=400&fit=crop&crop=center',
     technologies: ['React', 'Node.js', 'Socket.io'],
     github: '#'
+  },
+  {
+    id: 'ecommerce-website',
+    title: 'Full E-commerce Website',
+    description: 'Complete e-commerce platform with product catalog, shopping cart, user authentication, order management, and secure payment processing.',
+    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=400&fit=crop&crop=center',
+    technologies: ['React', 'Node.js', 'MongoDB', 'Stripe', 'Express'],
+    github: '#'
+  },
+  {
+    id: 'pdf-tools-website',
+    title: '40+ Tools PDF Website',
+    description: 'Comprehensive PDF management platform with 40+ tools including merge, split, compress, convert, and edit functionality with integrated payment system.',
+    image: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=800&h=400&fit=crop&crop=center',
+    technologies: ['React', 'Node.js', 'PDF.js', 'Stripe', 'PayPal'],
+    github: '#'
   }
 ];
 
