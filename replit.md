@@ -29,6 +29,7 @@ Portfolio requirements: More features and functionality, enhanced parallax scrol
 - ✅ Integrated social media section with Instagram, GitHub, LinkedIn, and Twitter/X links
 - ✅ Added Full E-commerce Website project with payment integration
 - ✅ Added 40+ Tools PDF Website project with payment system
+- ✅ Added PHP programming language to portfolio skills and technical sections
 
 ### Current Portfolio Structure
 The portfolio now contains 6 main sections:
