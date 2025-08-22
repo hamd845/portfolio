@@ -10,6 +10,30 @@ import ParallaxWrapper from "@/components/ParallaxWrapper";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import FloatingElements from "@/components/FloatingElements";
+import { Github, Linkedin, Twitter, Instagram } from "lucide-react";
+
+const socialLinks = [
+  {
+    name: "GitHub",
+    icon: Github,
+    url: "https://github.com/hamd845",
+  },
+  {
+    name: "LinkedIn", 
+    icon: Linkedin,
+    url: "https://www.linkedin.com/in/hamd-codes-113658311/",
+  },
+  {
+    name: "Twitter",
+    icon: Twitter,
+    url: "https://x.com/CodesHamd23703",
+  },
+  {
+    name: "Instagram",
+    icon: Instagram,
+    url: "https://www.instagram.com/hamd_code/",
+  }
+];
 
 export default function Home() {
 
@@ -76,6 +100,25 @@ export default function Home() {
               <p className="text-gray-400 dark:text-gray-600 mb-6">
                 Building the future, one line of code at a time.
               </p>
+              
+              {/* Social Media Links */}
+              <div className="flex justify-center space-x-6 mb-8">
+                {socialLinks.map((social) => (
+                  <motion.a
+                    key={social.name}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-10 h-10 bg-gray-800 dark:bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-700 dark:hover:bg-gray-300 transition-colors duration-300"
+                    data-testid={`footer-social-${social.name.toLowerCase()}`}
+                  >
+                    <social.icon className="w-5 h-5 text-white dark:text-gray-800" />
+                  </motion.a>
+                ))}
+              </div>
+              
               <p className="text-sm text-gray-500">
                 © 2024 Portfolio. All rights reserved. Designed & Developed with ❤️
               </p>
