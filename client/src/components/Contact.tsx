@@ -201,7 +201,7 @@ export default function Contact() {
                             <Input
                               {...field}
                               placeholder="Your Name"
-                              className="bg-dark-card/50 dark:bg-gray-100/50 border-gray-700/50 dark:border-gray-200/50 focus:border-primary rounded-xl h-12 glass-morphism"
+                              className="bg-white/10 dark:bg-white/10 border-gray-700/50 dark:border-gray-200/50 focus:border-primary rounded-xl h-12 text-white dark:text-white placeholder:text-white/60 dark:placeholder:text-white/60"
                               data-testid="input-name"
                             />
                           </motion.div>
@@ -222,7 +222,7 @@ export default function Contact() {
                               {...field}
                               type="email"
                               placeholder="your@email.com"
-                              className="bg-dark-card/50 dark:bg-gray-100/50 border-gray-700/50 dark:border-gray-200/50 focus:border-primary rounded-xl h-12 glass-morphism"
+                              className="bg-white/10 dark:bg-white/10 border-gray-700/50 dark:border-gray-200/50 focus:border-primary rounded-xl h-12 text-white dark:text-white placeholder:text-white/60 dark:placeholder:text-white/60"
                               data-testid="input-email"
                             />
                           </motion.div>
@@ -244,7 +244,7 @@ export default function Contact() {
                           <Input
                             {...field}
                             placeholder="Project Discussion"
-                            className="bg-dark-card/50 dark:bg-gray-100/50 border-gray-700/50 dark:border-gray-200/50 focus:border-primary rounded-xl h-12 glass-morphism"
+                            className="bg-white/10 dark:bg-white/10 border-gray-700/50 dark:border-gray-200/50 focus:border-primary rounded-xl h-12 text-white dark:text-white placeholder:text-white/60 dark:placeholder:text-white/60"
                             data-testid="input-subject"
                           />
                         </motion.div>
@@ -266,7 +266,7 @@ export default function Contact() {
                             {...field}
                             rows={6}
                             placeholder="Tell me about your project..."
-                            className="bg-dark-card/50 dark:bg-gray-100/50 border-gray-700/50 dark:border-gray-200/50 focus:border-primary resize-none rounded-xl glass-morphism"
+                            className="bg-white/10 dark:bg-white/10 border-gray-700/50 dark:border-gray-200/50 focus:border-primary resize-none rounded-xl text-white dark:text-white placeholder:text-white/60 dark:placeholder:text-white/60"
                             data-testid="textarea-message"
                           />
                         </motion.div>
@@ -276,11 +276,11 @@ export default function Contact() {
                   )}
                 />
                 
-                <div>
+                <div className="flex justify-center pt-4">
                   <Button
                     type="submit"
                     disabled={contactMutation.isPending}
-                    className="w-full px-8 py-6 bg-primary hover:bg-primary/90 rounded-xl font-semibold text-white text-lg shadow-lg transition-all duration-300 mx-auto block"
+                    className="w-full max-w-md px-8 py-6 bg-primary hover:bg-primary/90 rounded-xl font-semibold text-white text-lg shadow-lg hover:shadow-xl transition-all duration-300"
                     data-testid="button-send-message"
                   >
                     <motion.span 
