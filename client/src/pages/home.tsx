@@ -109,12 +109,12 @@ export default function Home() {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1 }}
+                    whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
-                    className="w-10 h-10 bg-gray-800 dark:bg-gray-200 rounded-full flex items-center justify-center hover:bg-gray-700 dark:hover:bg-gray-300 transition-colors duration-300"
+                    className="w-12 h-12 backdrop-blur-sm bg-white/10 dark:bg-black/10 border border-white/20 dark:border-gray-700/30 rounded-full flex items-center justify-center hover:bg-white/20 dark:hover:bg-black/20 hover:border-white/30 dark:hover:border-gray-600/40 transition-all duration-300 shadow-lg"
                     data-testid={`footer-social-${social.name.toLowerCase()}`}
                   >
-                    <social.icon className="w-5 h-5 text-white dark:text-gray-800" />
+                    <social.icon className="w-5 h-5 text-white/90 dark:text-gray-300" />
                   </motion.a>
                 ))}
               </div>
