@@ -169,7 +169,7 @@ export default function Contact() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ delay: index * 0.1, duration: 0.6 }}
                     viewport={{ once: true }}
-                    className={`w-16 h-16 bg-gradient-to-br ${social.color} rounded-2xl flex items-center justify-center text-white shadow-lg`}
+                    className={`w-16 h-16 bg-black rounded-2xl flex items-center justify-center text-white shadow-lg`}
                     data-testid={`social-${index}`}
                   >
                     <social.icon className="w-6 h-6" />

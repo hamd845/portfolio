@@ -71,7 +71,7 @@ export default function SocialMedia() {
               className={`p-6 glass-morphism rounded-3xl ${social.bgColor}`}
             >
               <div className="flex flex-col items-center space-y-4">
-                <div className={`w-16 h-16 rounded-2xl bg-white/10 dark:bg-gray-800/30 flex items-center justify-center`}>
+                <div className={`w-16 h-16 rounded-2xl bg-black flex items-center justify-center`}>
                   <social.icon className={`w-8 h-8 text-white/80 dark:text-gray-300 ${social.color}`} />
                 </div>
                 <span className={`font-medium text-white/80 dark:text-gray-300 ${social.color}`}>
