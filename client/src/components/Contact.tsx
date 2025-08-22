@@ -142,10 +142,10 @@ export default function Contact() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1, duration: 0.6 }}
                     viewport={{ once: true }}
-                    className="flex items-center space-x-6 group"
+                    className="flex items-center space-x-6"
                     data-testid={`contact-${info.label.toLowerCase()}`}
                   >
-                    <div className={`w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-${info.color}/10 transition-colors duration-150`}>
+                    <div className={`w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center`}>
                       <info.icon className={`w-6 h-6 text-${info.color}`} />
                     </div>
                     <div>
@@ -169,7 +169,7 @@ export default function Contact() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ delay: index * 0.1, duration: 0.6 }}
                     viewport={{ once: true }}
-                    className={`w-16 h-16 bg-gradient-to-br ${social.color} rounded-2xl flex items-center justify-center text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-150`}
+                    className={`w-16 h-16 bg-gradient-to-br ${social.color} rounded-2xl flex items-center justify-center text-white shadow-lg`}
                     data-testid={`social-${index}`}
                   >
                     <social.icon className="w-6 h-6" />

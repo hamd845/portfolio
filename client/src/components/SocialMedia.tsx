@@ -6,29 +6,29 @@ const socialLinks = [
     name: "GitHub",
     icon: Github,
     url: "https://github.com/hamd845",
-    color: "hover:text-gray-800 dark:hover:text-white",
-    bgColor: "hover:bg-gray-100 dark:hover:bg-gray-800"
+    color: "text-gray-800 dark:text-white",
+    bgColor: "bg-gray-100 dark:bg-gray-800"
   },
   {
     name: "LinkedIn", 
     icon: Linkedin,
     url: "https://www.linkedin.com/in/hamd-codes-113658311/",
-    color: "hover:text-blue-600",
-    bgColor: "hover:bg-blue-50 dark:hover:bg-blue-900/20"
+    color: "text-blue-600",
+    bgColor: "bg-blue-50 dark:bg-blue-900/20"
   },
   {
     name: "Twitter",
     icon: Twitter,
     url: "https://x.com/CodesHamd23703",
-    color: "hover:text-blue-400",
-    bgColor: "hover:bg-blue-50 dark:hover:bg-blue-900/20"
+    color: "text-blue-400",
+    bgColor: "bg-blue-50 dark:bg-blue-900/20"
   },
   {
     name: "Instagram",
     icon: Instagram,
     url: "https://www.instagram.com/hamd_code/",
-    color: "hover:text-pink-500",
-    bgColor: "hover:bg-pink-50 dark:hover:bg-pink-900/20"
+    color: "text-pink-500",
+    bgColor: "bg-pink-50 dark:bg-pink-900/20"
   }
 ];
 
@@ -68,14 +68,13 @@ export default function SocialMedia() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
               viewport={{ once: true }}
-              whileHover={{ y: -5, scale: 1.05 }}
-              className={`group p-6 glass-morphism rounded-3xl transition-all duration-300 ${social.bgColor}`}
+              className={`p-6 glass-morphism rounded-3xl ${social.bgColor}`}
             >
               <div className="flex flex-col items-center space-y-4">
-                <div className={`w-16 h-16 rounded-2xl bg-white/10 dark:bg-gray-800/30 flex items-center justify-center transition-colors duration-300 group-hover:bg-white/20 dark:group-hover:bg-gray-700/50`}>
-                  <social.icon className={`w-8 h-8 text-white/80 dark:text-gray-300 transition-colors duration-300 ${social.color}`} />
+                <div className={`w-16 h-16 rounded-2xl bg-white/10 dark:bg-gray-800/30 flex items-center justify-center`}>
+                  <social.icon className={`w-8 h-8 text-white/80 dark:text-gray-300 ${social.color}`} />
                 </div>
-                <span className={`font-medium text-white/80 dark:text-gray-300 transition-colors duration-300 ${social.color}`}>
+                <span className={`font-medium text-white/80 dark:text-gray-300 ${social.color}`}>
                   {social.name}
                 </span>
               </div>
