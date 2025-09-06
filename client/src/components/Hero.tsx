@@ -122,8 +122,8 @@ export default function Hero() {
             </span>
           </button>
           <a
-            href="/Hamd_Elahi_Resume.pdf"
-            download="Hamd_Elahi_Resume.pdf"
+            href="/myresume.pdf"
+            download="myresume.pdf"
             className="w-full sm:w-auto px-10 py-5 bg-white/10 border-2 border-primary/50 text-white hover:bg-primary/20 rounded-2xl font-semibold transition-all duration-200 inline-block z-30 relative text-center"
             data-testid="button-download-resume"
           >
